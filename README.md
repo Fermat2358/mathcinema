@@ -19,3 +19,4 @@ Upload the `dist/` folder to Netlify (or connect the repo).
 - Replace `purchaseLink` with your Stripe links
 - Swap `cover` image URLs and `trailerLink`
 - Add your Virtway + Frame VR links in the Museum section
+“Deployed via Netlify from GitHub”

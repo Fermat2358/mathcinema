@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; }
+/* --- TEMP FIX: force 16:9 for film posters even if old classes remain --- */
+#root #films article img.h-44.w-full.object-cover {
+  height: auto !important;
+  width: 100% !important;
+  aspect-ratio: 16 / 9 !important;  /* modern browsers */
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+@supports not (aspect-ratio: 1) {
+  /* fallback if a browser ignores aspect-ratio */
+  #root #films article img.h-44.w-full.object-cover {
+    height: auto !important;
+  }
+}
+/* === Force posters to display complete artwork in a 16:9 frame === */
+.film-poster,
+#root #films article .relative,
+#root .rounded-t-3xl.pt-\[56\.25\%\],
+#root .pt-\[56\.25\%\] {
+  background-color: #0f172a; /* slate-900, keeps bars clean */
+}
+
+/* Any poster image in our 16:9 wrappers uses contain */
+#root img.absolute.inset-0.block.h-full.w-full {
+  object-fit: contain !important;
+  object-position: center !important;
+  background-color: #0f172a !important;
+}
+
+/* Safety net for the old h-44 w-full pattern */
+#root #films article img.h-44.w-full.object-cover {
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 16 / 9 !important;
+  display: block !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  background-color: #0f172a !important;
+}
+

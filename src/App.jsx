@@ -67,6 +67,22 @@ const initialFilms = [
     includes: ["Mastered 1080p MP4", "Teacher notes & scene prompts", "Captions (EN)"],
     tags: ["Symmetry", "Algebra", "Women in Maths"],
   },
+  
+  {
+  id: "galois",
+  title: "Galois – The Fire of Algebra",
+  tagline: "Revolution, genius, and the birth of modern algebra.",
+  priceGBP: 12.0,
+  duration: "3m 30s",
+  level: "KS3–KS4",
+  cover: "/posters/galois.jpg",
+  purchaseLink: "https://buy.stripe.com/test_4gM00k6Yk3ow2mBe7V8N201",
+  trailerLink: "#",
+  includes: ["Mastered 1080p MP4", "Teacher notes & scene prompts (coming soon)", "Captions (EN)"],
+  tags: ["Algebra", "Groups", "France"]
+}
+
+
 ];
 
 /* ========= Utils ========= */

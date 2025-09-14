@@ -79,28 +79,58 @@ const initialFilms = [
   purchaseLink: "https://buy.stripe.com/test_4gM00k6Yk3ow2mBe7V8N201",
   trailerLink: "#",
   includes: ["Mastered 1080p MP4", "Teacher notes & scene prompts (coming soon)", "Captions (EN)"],
-  tags: ["Algebra", "Groups", "France"]
+  tags: ["Algebra", "Groups", "France"],
+  embedSrc: "https://player.vimeo.com/video/1118453852?h=ae721f8202&badge=0&autopause=0&player_id=0&app_id=58479",
 }
 
 
+
+
+
 ];
+// Helper: read ?film=... from the URL hash and return that film object
+function getThanksFilm(films) {
+  try {
+    const hash = window.location.hash || "";
+    const qs = hash.includes("?") ? hash.split("?")[1] : "";
+    const params = new URLSearchParams(qs);
+    const id = params.get("film");
+    return films.find(f => f.id === id) || null;
+  } catch {
+    return null;
+  }
+}
 
 /* ========= Utils ========= */
 const currency = (n) => `£${Number(n).toFixed(2)} GBP`;
 
 /* ========= App ========= */
 export default function App() {
-  const [route, setRoute] = useState((window.location.hash || "#home").replace("#", "") || "home");
+  // Route (read from hash, e.g. "#films", "#thanks?film=galois")
+  const [route, setRoute] = useState(
+    (window.location.hash || "#home").replace("#", "") || "home"
+  );
+
+  // New: which film (if any) should the Thanks page show?
+  const film = getThanksFilm(initialFilms);
+
+  // New: detect "#thanks" even when it includes a query (?film=...)
+  const onThanks = (route ?? "").split("?")[0] === "thanks";
+
+  // Search and selection (as you had)
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState(null);
 
+  // Keep route in sync with hash changes
   useEffect(() => {
-    const applyHash = () => setRoute((window.location.hash || "#home").replace("#", "") || "home");
+    const applyHash = () =>
+      setRoute((window.location.hash || "#home").replace("#", "") || "home");
     applyHash();
     window.addEventListener("hashchange", applyHash);
     return () => window.removeEventListener("hashchange", applyHash);
   }, []);
 
+  // Filter films by search query (unchanged)
   const filtered = useMemo(() => {
     const list = Array.isArray(initialFilms) ? initialFilms : [];
     if (!query) return list;
@@ -113,20 +143,62 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 text-white">
       <SiteNav route={route} />
+
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-24">
         {route === "home" && <Home />}
+
         {route === "films" && (
-          <Films films={filtered} query={query} setQuery={setQuery} onSelect={setSelected} />
+          <Films
+            films={filtered}
+            query={query}
+            setQuery={setQuery}
+            onSelect={setSelected}
+          />
         )}
+
         {route === "museum" && <Museum />}
         {route === "about" && <About />}
         {route === "contact" && <Contact />}
+
+        {/* ===== /#thanks – Vimeo player based on ?film=<id> ===== */}
+        {onThanks && (
+          <section id="thanks" className="max-w-5xl mx-auto px-4 py-16 text-slate-100">
+            <h2 className="text-3xl font-semibold mb-1">Thanks for your purchase!</h2>
+            <p className="mb-6 opacity-80">{film ? film.title : ""}</p>
+
+            {film && film.embedSrc ? (
+              <div className="relative pt-[56.25%] rounded-2xl overflow-hidden bg-slate-900 shadow-lg">
+                <iframe
+                  src={film.embedSrc}
+                  className="absolute inset-0 h-full w-full"
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                  allowFullScreen
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  title={film.title}
+                />
+              </div>
+            ) : (
+              <p className="opacity-80">
+                We couldn’t find a streaming link for this purchase. If you just paid, please use
+                the link in your receipt or email{" "}
+                <a className="underline" href="mailto:gerrydoch@gmail.com">
+                  gerrydoch@gmail.com
+                </a>.
+              </p>
+            )}
+          </section>
+        )}
+        {/* ===== end /#thanks ===== */}
       </main>
-      {selected && <FilmModal film={selected} onClose={() => setSelected(null)} />}
+
+      {selected && (
+        <FilmModal film={selected} onClose={() => setSelected(null)} />
+      )}
       <SiteFooter />
     </div>
   );
 }
+
 
 /* ========= Nav ========= */
 function SiteNav({ route }) {

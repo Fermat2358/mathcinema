@@ -14,6 +14,7 @@ const initialFilms = [
     trailerLink: "#",
     includes: ["4 complete short films", "Teacher notes & scene prompts", "Captions (EN)"],
     tags: ["Bundle", "Founders", "Discount"],
+    
   },
   {
     id: "descartes",
@@ -27,6 +28,7 @@ const initialFilms = [
     trailerLink: "#",
     includes: ["Mastered 1080p MP4", "Teacher notes & scene prompts", "Captions (EN)"],
     tags: ["Cartesian geometry", "History", "Philosophy"],
+    embedSrc: "https://player.vimeo.com/video/1118483220?h=b02ee66cb9",
   },
   {
     id: "pythagoras",
@@ -40,6 +42,7 @@ const initialFilms = [
     trailerLink: "#",
     includes: ["Mastered 1080p MP4", "Teacher notes & scene prompts", "Captions (EN)"],
     tags: ["Triangles", "Music", "Ancient Greece"],
+    embedSrc: "https://player.vimeo.com/video/1118492884?h=24235ab747",
   },
   {
     id: "sophie",
@@ -53,6 +56,7 @@ const initialFilms = [
     trailerLink: "#",
     includes: ["Mastered 1080p MP4", "Teacher notes & scene prompts", "Captions (EN)"],
     tags: ["Primes", "Resilience", "Women in Maths"],
+    embedSrc: "https://player.vimeo.com/video/1118489526?h=530df61cb5",
   },
   {
     id: "emmy",
@@ -66,6 +70,7 @@ const initialFilms = [
     trailerLink: "#",
     includes: ["Mastered 1080p MP4", "Teacher notes & scene prompts", "Captions (EN)"],
     tags: ["Symmetry", "Algebra", "Women in Maths"],
+    embedSrc: "https://player.vimeo.com/video/1118491830?h=890a64cc3f",
   },
   
   {

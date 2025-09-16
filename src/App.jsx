@@ -47,7 +47,7 @@ const initialFilms = [
     includes: ["Mastered 1080p MP4", "Teacher notes & scene prompts", "Captions (EN)"],
     tags: ["Triangles", "Music", "Ancient Greece"],
     embedSrc: "https://player.vimeo.com/video/1118492884?h=24235ab747",
-    activityPath: "/activities/pythagoras.html",
+    activityPath: "/activities/pythagorasv2.html",
 activityTitle: "Squares on a Right Triangle (Web Sketchpad)",
   },
   {

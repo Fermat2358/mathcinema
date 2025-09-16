@@ -2,20 +2,23 @@ import React, { useEffect, useMemo, useState } from "react";
 
 /* ========= Film catalog ========= */
 const initialFilms = [
-  {
-    id: "bundle",
-    title: "MathCinema Founders Bundle",
-    tagline: "Get all 4 films and save 15%",
-    priceGBP: 40.0,
-    duration: "4 complete films",
-    level: "KS3–KS4",
-    cover: "/posters/bundle.jpg",
-    purchaseLink: "https://buy.stripe.com/28E7sM1E00ck7GV1l98N200",
-    trailerLink: "#",
-    includes: ["4 complete short films", "Teacher notes & scene prompts", "Captions (EN)"],
-    tags: ["Bundle", "Founders", "Discount"],
-    
-  },
+ {
+  id: "bundle",
+  title: "MathCinema Bundle (5 Films)",
+  tagline: "Five Pixar-style shorts about great mathematicians.",
+  priceGBP: 40.0,
+  duration: "5 short films",
+  level: "KS3–KS4",
+  cover: "/posters/bundle.jpg",
+  purchaseLink: "https://buy.stripe.com/test_14AdRaciE0ck3qFbZN8N205", 
+  includes: [
+    "5 films in 1080p",
+  ],
+  tags: ["Bundle", "Classroom", "Best value"],
+
+  // NEW: the bundle “playlist” = the IDs of films to show on the thanks page
+  embedPlaylist: ["descartes", "emmy", "sophie", "pythagoras", "galois"]
+},
   {
     id: "descartes",
     title: "Lines of Thought: The Life of René Descartes",
@@ -166,33 +169,60 @@ export default function App() {
         {route === "contact" && <Contact />}
 
         {/* ===== /#thanks – Vimeo player based on ?film=<id> ===== */}
-        {onThanks && (
-          <section id="thanks" className="max-w-5xl mx-auto px-4 py-16 text-slate-100">
-            <h2 className="text-3xl font-semibold mb-1">Thanks for your purchase!</h2>
-            <p className="mb-6 opacity-80">{film ? film.title : ""}</p>
+       {onThanks && (
+  <section id="thanks" className="max-w-5xl mx-auto px-4 py-16 text-slate-100">
+    <h2 className="text-3xl font-semibold mb-1">Thanks for your purchase!</h2>
+    <p className="mb-6 opacity-80">{film ? film.title : ""}</p>
 
-            {film && film.embedSrc ? (
+    {/* If it's a bundle, render every film in the playlist */}
+    {film?.embedPlaylist?.length ? (
+      <div className="grid gap-10">
+        {film.embedPlaylist
+          .map(id => initialFilms.find(f => f.id === id))
+          .filter(Boolean)
+          .map(item => (
+            <div key={item.id}>
               <div className="relative pt-[56.25%] rounded-2xl overflow-hidden bg-slate-900 shadow-lg">
                 <iframe
-                  src={film.embedSrc}
+                  src={item.embedSrc}
                   className="absolute inset-0 h-full w-full"
                   allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
                   allowFullScreen
                   referrerPolicy="strict-origin-when-cross-origin"
-                  title={film.title}
+                  title={item.title}
                 />
               </div>
-            ) : (
-              <p className="opacity-80">
-                We couldn’t find a streaming link for this purchase. If you just paid, please use
-                the link in your receipt or email{" "}
-                <a className="underline" href="mailto:gerrydoch@gmail.com">
-                  gerrydoch@gmail.com
-                </a>.
-              </p>
-            )}
-          </section>
-        )}
+              <h3 className="mt-3 text-lg font-medium">{item.title}</h3>
+            </div>
+          ))}
+      </div>
+    ) : film?.embedSrc ? (
+      /* Single film (non-bundle) */
+      <div className="relative pt-[56.25%] rounded-2xl overflow-hidden bg-slate-900 shadow-lg">
+        <iframe
+          src={film.embedSrc}
+          className="absolute inset-0 h-full w-full"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+          allowFullScreen
+          referrerPolicy="strict-origin-when-cross-origin"
+          title={film.title}
+        />
+      </div>
+    ) : (
+      <p className="opacity-80">
+        We couldn’t find a streaming link for this purchase. If you just paid, please use the link in your receipt
+        or email <a className="underline" href="mailto:gerrydoch@gmail.com">gerrydoch@gmail.com</a>.
+      </p>
+    )}
+
+    <div className="mt-6">
+      <a href="#films" className="inline-flex items-center rounded-lg bg-sky-500 px-4 py-2 font-medium text-white hover:bg-sky-600">
+        ← Back to Films
+      </a>
+    </div>
+  </section>
+)}
+
         {/* ===== end /#thanks ===== */}
       </main>
 

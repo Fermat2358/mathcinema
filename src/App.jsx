@@ -9,12 +9,13 @@ const initialFilms = [
   priceGBP: 40.0,
   duration: "5 short films",
   level: "KS3–KS4",
-  cover: "/posters/bundle.jpg",
+  cover: "/posters/bundle-5films-v3.jpg",
   purchaseLink: "https://buy.stripe.com/test_14AdRaciE0ck3qFbZN8N205", 
   includes: [
     "5 films in 1080p",
   ],
   tags: ["Bundle", "Classroom", "Best value"],
+  embedSrc: "https://vimeo.com/showcase/11880291/embed2",
 
   // NEW: the bundle “playlist” = the IDs of films to show on the thanks page
   embedPlaylist: ["descartes", "emmy", "sophie", "pythagoras", "galois"]
@@ -46,6 +47,8 @@ const initialFilms = [
     includes: ["Mastered 1080p MP4", "Teacher notes & scene prompts", "Captions (EN)"],
     tags: ["Triangles", "Music", "Ancient Greece"],
     embedSrc: "https://player.vimeo.com/video/1118492884?h=24235ab747",
+    activityPath: "/activities/pythagoras.html",
+activityTitle: "Squares on a Right Triangle (Web Sketchpad)",
   },
   {
     id: "sophie",
@@ -114,6 +117,8 @@ const currency = (n) => `£${Number(n).toFixed(2)} GBP`;
 
 /* ========= App ========= */
 export default function App() {
+  const [showActivity, setShowActivity] = useState(false);
+
   // Route (read from hash, e.g. "#films", "#thanks?film=galois")
   const [route, setRoute] = useState(
     (window.location.hash || "#home").replace("#", "") || "home"
@@ -198,16 +203,47 @@ export default function App() {
       </div>
     ) : film?.embedSrc ? (
       /* Single film (non-bundle) */
-      <div className="relative pt-[56.25%] rounded-2xl overflow-hidden bg-slate-900 shadow-lg">
-        <iframe
-          src={film.embedSrc}
-          className="absolute inset-0 h-full w-full"
-          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-          allowFullScreen
-          referrerPolicy="strict-origin-when-cross-origin"
-          title={film.title}
-        />
-      </div>
+      <>
+  {/* Vimeo player */}
+  <div className="relative pt-[56.25%] rounded-2xl overflow-hidden bg-slate-900 shadow-lg">
+    <iframe
+      src={film.embedSrc}
+      className="absolute inset-0 h-full w-full"
+      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+      allowFullScreen
+      referrerPolicy="strict-origin-when-cross-origin"
+      title={film.title}
+    />
+  </div>
+
+  {/* Activity toggle (only if this film has an activity) */}
+  {film?.activityPath && (
+    <div className="mt-6">
+      <button
+        onClick={() => setShowActivity(v => !v)}
+        className="inline-flex items-center gap-2 rounded-lg bg-amber-500/90 hover:bg-amber-500 text-slate-900 font-semibold px-4 py-2 transition"
+      >
+        {showActivity ? "Hide activity" : "Open interactive activity"}
+      </button>
+
+      {showActivity ? (
+        <div className="relative pt-[75%] mt-4 rounded-2xl overflow-hidden bg-slate-900 shadow-lg">
+          <iframe
+            src={film.activityPath}
+            className="absolute inset-0 h-full w-full"
+            title={`${film.title} — activity`}
+            allowFullScreen
+          />
+        </div>
+      ) : (
+        <p className="mt-2 opacity-60 text-sm">
+          Explore the maths hands-on in the activity.
+        </p>
+      )}
+    </div>
+  )}
+</>
+
     ) : (
       <p className="opacity-80">
         We couldn’t find a streaming link for this purchase. If you just paid, please use the link in your receipt

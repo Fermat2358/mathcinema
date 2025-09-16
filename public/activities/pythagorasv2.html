@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+    <html lang="en">
+          <head>
+            <meta charset="utf-8" />
+            <title>Web Sketchpad</title>
+            <script charset="utf-8" type="text/javascript" src="https://gsptest.scratchconsortium.com/wsp/gsphost_v1/js/jquery-2.1.0.min.js"></script>
+            <script charset="utf-8" type="text/javascript" src="https://gsptest.scratchconsortium.com/wsp/gsphost_v1/js/wsp-min.js"></script>
+            <script charset="utf-8" type="text/javascript" src="https://gsptest.scratchconsortium.com/wsp/gsphost_v1/js/wsp-runner.js"></script>
+            <script charset="utf-8" type="text/javascript">
+                var sketch = {
+  "metadata" : {
+    "width" : 1125,
+    "height" : 786,
+    "wsp-version" : "4.8.0",
+    "exporter-version" : "5.10",
+    "exporter-build" : "3058",
+    "exporter-debug" : false,
+    "original-document-name" : "Pythagoras",
+    "start-page" : "1"
+    },
+  "resources" : {
+    "fontList" : [
+      "\"Times New Roman\", serif",
+      "\"Arial\", sans-serif"
+      ]
+    },
+  "pages" : [
+    {
+      "metadata" : {
+        "title" : "1",
+        "id" : "1",
+        "sketchRect" : {
+          "top" : 103,
+          "left" : 262,
+          "bottom" : 889,
+          "right" : 1387
+          }
+        },
+      "preferences" : {
+        "units" : {
+          "length" : "cm",
+          "angle" : "deg"
+          },
+        "precision" : {
+          "length" : 2,
+          "angle" : 0,
+          "scalar" : 2
+          },
+        "colorableComponents" : {
+          "Interior" : {
+            "color" : "yellow"
+            },
+          "ActionButton" : {
+            "color" : "rgb(255,128,0)"
+            }
+          },
+        "text" : {
+          "mathItalicization" : true,
+          "textTypes" : {
+            "Label" : {
+              "font-family" : "\"Times New Roman\", serif"
+              },
+            "Caption" : {
+              "font-family" : "\"Arial\", sans-serif",
+              "font-size" : 18,
+              "font-weight" : "bold",
+              "font-style" : "italic"
+              },
+            "Measurement" : {
+              "font-family" : "\"Times New Roman\", serif",
+              "font-weight" : "bold"
+              },
+            "Action" : {
+              "label" : {
+                "font-family" : "\"Arial\", sans-serif",
+                "font-size" : 24
+                }
+              },
+            "Table" : {
+              "font-family" : "\"Arial\", sans-serif",
+              "font-size" : 24
+              },
+            "AxisTicksAndOptionalLabel" : {
+              "font-family" : "\"Arial\", sans-serif"
+              }
+            }
+          }
+        },
+      "objects" : {
+        "1" : {
+          "kind" : "Point",
+          "genus" : "Point",
+          "constraint" : "Free",
+          "geom" : {
+            "loc" : {
+              "x" : 453,
+              "y" : 385
+              }
+            },
+          "label" : "A",
+          "style" : {
+            "label" : {
+              "showLabel" : true,
+              "labelOffsetX" : 3,
+              "labelOffsetY" : 0
+              }
+            }
+          },
+        "2" : {
+          "kind" : "Point",
+          "genus" : "Point",
+          "constraint" : "Free",
+          "geom" : {
+            "loc" : {
+              "x" : 590,
+              "y" : 385
+              }
+            },
+          "label" : "H",
+          "style" : {
+            "label" : {
+              "showLabel" : true,
+              "labelOffsetX" : 8,
+              "labelOffsetY" : -10
+              }
+            }
+          },
+        "3" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "p0" : "1",
+            "p1" : "2"
+            },
+          "constraint" : "Segment"
+          },
+        "4" : {
+          "kind" : "Straight",
+          "genus" : "Perpendicular",
+          "parents" : {
+            "p0" : "1",
+            "line" : "3"
+            },
+          "constraint" : "Perpendicular",
+          "style" : {
+            "hidden" : true,
+            "line-style" : "dashed"
+            }
+          },
+        "5" : {
+          "kind" : "Point",
+          "genus" : "PointOnPath",
+          "parents" : {
+            "path" : "4"
+            },
+          "value" : -0.090272070670406074,
+          "constraint" : "PointOnPath",
+          "label" : "I",
+          "style" : {
+            "label" : {
+              "showLabel" : true,
+              "labelOffsetX" : -14,
+              "labelOffsetY" : -28
+              }
+            }
+          },
+        "6" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "p0" : "1",
+            "p1" : "5"
+            },
+          "constraint" : "Segment"
+          },
+        "7" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "p0" : "5",
+            "p1" : "2"
+            },
+          "constraint" : "Segment"
+          },
+        "8" : {
+          "kind" : "Circle",
+          "genus" : "Circle",
+          "parents" : {
+            "p0" : "1",
+            "p1" : "5"
+            },
+          "constraint" : "CircleFromTwoPoints",
+          "style" : {
+            "hidden" : true,
+            "width" : 1
+            }
+          },
+        "9" : {
+          "kind" : "Straight",
+          "genus" : "Perpendicular",
+          "parents" : {
+            "p0" : "1",
+            "line" : "6"
+            },
+          "constraint" : "Perpendicular",
+          "style" : {
+            "hidden" : true,
+            "width" : 1
+            }
+          },
+        "10" : {
+          "kind" : "Straight",
+          "genus" : "Perpendicular",
+          "parents" : {
+            "p0" : "5",
+            "line" : "6"
+            },
+          "constraint" : "Perpendicular",
+          "style" : {
+            "hidden" : true,
+            "width" : 1
+            }
+          },
+        "11" : {
+          "kind" : "Point",
+          "genus" : "Intersection",
+          "parents" : {
+            "obj" : "9",
+            "circle" : "8"
+            },
+          "constraint" : "Intersection1",
+          "label" : "B",
+          "style" : {
+            "label" : {
+              "showLabel" : true,
+              "labelOffsetX" : 8,
+              "labelOffsetY" : 5
+              }
+            }
+          },
+        "12" : {
+          "kind" : "Straight",
+          "genus" : "Perpendicular",
+          "parents" : {
+            "p0" : "11",
+            "line" : "9"
+            },
+          "constraint" : "Perpendicular",
+          "style" : {
+            "hidden" : true,
+            "width" : 1
+            }
+          },
+        "13" : {
+          "kind" : "Point",
+          "genus" : "Intersection",
+          "parents" : {
+            "line0" : "10",
+            "line1" : "12"
+            },
+          "constraint" : "Intersection",
+          "label" : "C",
+          "style" : {
+            "label" : {
+              "showLabel" : true,
+              "labelOffsetX" : -19,
+              "labelOffsetY" : -21
+              }
+            }
+          },
+        "14" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "p0" : "1",
+            "p1" : "11"
+            },
+          "constraint" : "Segment"
+          },
+        "15" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "p0" : "11",
+            "p1" : "13"
+            },
+          "constraint" : "Segment"
+          },
+        "16" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "p0" : "13",
+            "p1" : "5"
+            },
+          "constraint" : "Segment"
+          },
+        "17" : {
+          "kind" : "Polygon",
+          "genus" : "Quadrilateral",
+          "parents" : {
+            "0" : "1",
+            "1" : "5",
+            "2" : "13",
+            "3" : "11"
+            },
+          "constraint" : "PolygonFromPoints",
+          "style" : {
+            "color" : "red",
+            "layerOrder" : 0,
+            "framePerimeter" : true
+            }
+          },
+        "18" : {
+          "kind" : "Circle",
+          "genus" : "Circle",
+          "parents" : {
+            "p0" : "2",
+            "p1" : "1"
+            },
+          "constraint" : "CircleFromTwoPoints",
+          "style" : {
+            "hidden" : true,
+            "width" : 1
+            }
+          },
+        "19" : {
+          "kind" : "Straight",
+          "genus" : "Perpendicular",
+          "parents" : {
+            "p0" : "2",
+            "line" : "3"
+            },
+          "constraint" : "Perpendicular",
+          "style" : {
+            "hidden" : true,
+            "width" : 1
+            }
+          },
+        "20" : {
+          "kind" : "Point",
+          "genus" : "Intersection",
+          "parents" : {
+            "obj" : "19",
+            "circle" : "18"
+            },
+          "constraint" : "Intersection2",
+          "label" : "D",
+          "style" : {
+            "label" : {
+              "showLabel" : true,
+              "labelOffsetX" : 8,
+              "labelOffsetY" : 5
+              }
+            }
+          },
+        "21" : {
+          "kind" : "Straight",
+          "genus" : "Perpendicular",
+          "parents" : {
+            "p0" : "20",
+            "line" : "19"
+            },
+          "constraint" : "Perpendicular",
+          "style" : {
+            "hidden" : true,
+            "width" : 1
+            }
+          },
+        "22" : {
+          "kind" : "Point",
+          "genus" : "Intersection",
+          "parents" : {
+            "line0" : "4",
+            "line1" : "21"
+            },
+          "constraint" : "Intersection",
+          "label" : "E",
+          "style" : {
+            "label" : {
+              "showLabel" : true,
+              "labelOffsetX" : 8,
+              "labelOffsetY" : 5
+              }
+            }
+          },
+        "23" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "p0" : "2",
+            "p1" : "20"
+            },
+          "constraint" : "Segment"
+          },
+        "24" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "p0" : "20",
+            "p1" : "22"
+            },
+          "constraint" : "Segment"
+          },
+        "25" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "p0" : "22",
+            "p1" : "1"
+            },
+          "constraint" : "Segment"
+          },
+        "26" : {
+          "kind" : "Polygon",
+          "genus" : "Quadrilateral",
+          "parents" : {
+            "0" : "2",
+            "1" : "1",
+            "2" : "22",
+            "3" : "20"
+            },
+          "constraint" : "PolygonFromPoints",
+          "style" : {
+            "color" : "blue",
+            "layerOrder" : 0,
+            "framePerimeter" : true
+            }
+          },
+        "27" : {
+          "kind" : "Circle",
+          "genus" : "Circle",
+          "parents" : {
+            "p0" : "5",
+            "p1" : "2"
+            },
+          "constraint" : "CircleFromTwoPoints",
+          "style" : {
+            "hidden" : true,
+            "width" : 1
+            }
+          },
+        "28" : {
+          "kind" : "Straight",
+          "genus" : "Perpendicular",
+          "parents" : {
+            "p0" : "5",
+            "line" : "7"
+            },
+          "constraint" : "Perpendicular",
+          "style" : {
+            "hidden" : true,
+            "width" : 1
+            }
+          },
+        "29" : {
+          "kind" : "Straight",
+          "genus" : "Perpendicular",
+          "parents" : {
+            "p0" : "2",
+            "line" : "7"
+            },
+          "constraint" : "Perpendicular",
+          "style" : {
+            "hidden" : true,
+            "width" : 1
+            }
+          },
+        "30" : {
+          "kind" : "Point",
+          "genus" : "Intersection",
+          "parents" : {
+            "obj" : "28",
+            "circle" : "27"
+            },
+          "constraint" : "Intersection1",
+          "label" : "F",
+          "style" : {
+            "label" : {
+              "showLabel" : true,
+              "labelOffsetX" : -21,
+              "labelOffsetY" : -21
+              }
+            }
+          },
+        "31" : {
+          "kind" : "Straight",
+          "genus" : "Perpendicular",
+          "parents" : {
+            "p0" : "30",
+            "line" : "28"
+            },
+          "constraint" : "Perpendicular",
+          "style" : {
+            "hidden" : true,
+            "width" : 1
+            }
+          },
+        "32" : {
+          "kind" : "Point",
+          "genus" : "Intersection",
+          "parents" : {
+            "line0" : "29",
+            "line1" : "31"
+            },
+          "constraint" : "Intersection",
+          "label" : "G",
+          "style" : {
+            "label" : {
+              "showLabel" : true,
+              "labelOffsetX" : 8,
+              "labelOffsetY" : 5
+              }
+            }
+          },
+        "33" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "p0" : "5",
+            "p1" : "30"
+            },
+          "constraint" : "Segment"
+          },
+        "34" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "p0" : "30",
+            "p1" : "32"
+            },
+          "constraint" : "Segment"
+          },
+        "35" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "p0" : "32",
+            "p1" : "2"
+            },
+          "constraint" : "Segment"
+          },
+        "36" : {
+          "kind" : "Polygon",
+          "genus" : "Quadrilateral",
+          "parents" : {
+            "0" : "5",
+            "1" : "2",
+            "2" : "32",
+            "3" : "30"
+            },
+          "constraint" : "PolygonFromPoints",
+          "style" : {
+            "color" : "lime",
+            "layerOrder" : 0,
+            "framePerimeter" : true
+            }
+          },
+        "37" : {
+          "kind" : "Polygon",
+          "genus" : "Triangle",
+          "parents" : {
+            "0" : "1",
+            "1" : "2",
+            "2" : "5"
+            },
+          "constraint" : "PolygonFromPoints",
+          "style" : {
+            "layerOrder" : 1
+            }
+          },
+        "38" : {
+          "kind" : "Button",
+          "genus" : "Action",
+          "parents" : {
+            "0" : "1"
+            },
+          "geom" : {
+            "loc" : {
+              "x" : 276,
+              "y" : 581
+              }
+            },
+          "label" : "Change the triangle",
+          "constraint" : "ActionButtonAnimate",
+          "messages" : [
+            "Change the triangle"
+            ],
+          "animationStates" : [
+            {
+              "rate" : 3,
+              "timeInterval" : 0,
+              "repeat" : true,
+              "motionType" : "forward"
+              }
+            ]
+          },
+        "39" : {
+          "kind" : "Measure",
+          "genus" : "AreaMeasure",
+          "parents" : {
+            "shape" : "36"
+            },
+          "constraint" : "MeasurementArea",
+          "geom" : {
+            "loc" : {
+              "x" : 949,
+              "y" : 111
+              }
+            },
+          "label" : "Area of Green Square",
+          "style" : {
+            "precision" : 2,
+            "nameOrigin" : "namedFromLabel"
+            }
+          },
+        "40" : {
+          "kind" : "Measure",
+          "genus" : "AreaMeasure",
+          "parents" : {
+            "shape" : "26"
+            },
+          "constraint" : "MeasurementArea",
+          "geom" : {
+            "loc" : {
+              "x" : 954,
+              "y" : 149
+              }
+            },
+          "label" : "Area of Blue Square",
+          "style" : {
+            "precision" : 2,
+            "nameOrigin" : "namedFromLabel"
+            }
+          },
+        "41" : {
+          "kind" : "Measure",
+          "genus" : "AreaMeasure",
+          "parents" : {
+            "shape" : "17"
+            },
+          "constraint" : "MeasurementArea",
+          "geom" : {
+            "loc" : {
+              "x" : 954,
+              "y" : 188
+              }
+            },
+          "label" : "Area of Red Square",
+          "style" : {
+            "precision" : 2,
+            "nameOrigin" : "namedFromLabel"
+            }
+          },
+        "42" : {
+          "kind" : "Expression",
+          "genus" : "ScalarMeasure",
+          "parents" : {
+            "0" : "40",
+            "1" : "41"
+            },
+          "constraint" : "Calculation",
+          "geom" : {
+            "loc" : {
+              "x" : 693,
+              "y" : 283
+              }
+            },
+          "expressionType" : "UniMeasure_ExprType",
+          "expression" : "@0+@1",
+          "latentVisibility" : true,
+          "style" : {
+            "hidden" : true,
+            "precision" : 2,
+            "nameOrigin" : "namedFromTemplate"
+            }
+          },
+        "43" : {
+          "kind" : "Button",
+          "genus" : "Action",
+          "parents" : {
+            "0" : "42"
+            },
+          "geom" : {
+            "loc" : {
+              "x" : 915,
+              "y" : 236
+              }
+            },
+          "label" : "Area of Blue + Area of Red",
+          "constraint" : "ActionButtonToggleHideShow",
+          "messages" : [
+            "Area of Blue + Area of Red",
+            "Area of Blue + Area of Red"
+            ],
+          "fade" : true
+          },
+        "44" : {
+          "kind" : "Text",
+          "genus" : "CompositeText",
+          "parents" : {
+            "0" : "1",
+            "1" : "5",
+            "2" : "2"
+            },
+          "constraint" : "CompositeText",
+          "geom" : {
+            "loc" : {
+              "x" : 911,
+              "y" : 277
+              }
+            },
+          "textMFS" : "<VL<H<T'Triangle  '><?1x1<SS2<T'A'>>><?1x2<SS2<T'I'>>><?1x3<SS2<T'H'>>><T' is a right-angled triangle.'>><0><T'1. Observe the areas of each of the squares that'><T'have been constructed on the sides of the'><T'right-angled triangle.'><0><T'2.  Click on the button above to calculate the Area of'><T'the Blue Square plus the Area of the Red square.'><0><T'3. What do you notice?'><0><T'4.  Click on the button to change the dimensions of'><T'the triangle.  Click the button again to stop.'><0><T'5. Observe the area mesurements again.  What do'><T'you notice now?'><0><T'6.  Repeat the steps 1 - 5 above  a few times.  What'><T'do you notice about the area measurements each'><T'time? '><0><T'7.  Try to write down a statement about a'><T'relationship between the areas of the squares that'><T'can be constructed on the sides of any right-angled'><T'triangle that you think might always be true.'><F110xx1C0x20x3212670x>>"
+          },
+        "45" : {
+          "kind" : "AngleMarker",
+          "genus" : "AngleMarker",
+          "parents" : {
+            "p0" : "5",
+            "p1" : "1",
+            "p2" : "2"
+            },
+          "constraint" : "AngleMarker_Simple",
+          "style" : {
+            "opacity" : 0.25,
+            "show-angle-direction" : true
+            }
+          }
+        }
+      }
+    ]
+  };
+            </script>
+            <style type="text/css">
+                .sketch_canvas {border: medium solid lightgray; display: inline-block;}
+            </style>
+        </head>
+        <body role="main">
+            <div class="sketch_canvas" data-var="sketch" >&nbsp;</div>
+            
+        </body>
+    </html>
+    

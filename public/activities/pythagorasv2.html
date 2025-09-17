@@ -1,29 +1,5 @@
 <!DOCTYPE html>
     <html lang="en">
-      <style>
-  /* Make text readable on MathCinema's dark background */
-  html, body { background: transparent; }
-
-  /* Turn all typical text elements light */
-  body, p, li, h1, h2, h3, h4, label,
-  .instructions, .notes, .rightPanel {
-    color: #e5e7eb !important; /* slate-200 */
-  }
-
-  /* Optional: give the right-hand text panel a subtle backdrop */
-  .instructions, .notes, .rightPanel, .text-panel, .sidebar {
-    background: rgba(15, 23, 42, 0.55); /* semi-dark */
-    border-radius: 12px;
-    padding: 12px;
-  }
-
-  a { color: #93c5fd; } /* light-link color */
-  button {
-    background: #f59e0b; color: #111827;
-    border: 0; border-radius: 8px; padding: .5rem .75rem; font-weight: 600;
-  }
-</style>
-
           <head>
             <meta charset="utf-8" />
             <title>Web Sketchpad</title>
@@ -54,10 +30,10 @@
         "title" : "1",
         "id" : "1",
         "sketchRect" : {
-          "top" : 103,
-          "left" : 262,
-          "bottom" : 889,
-          "right" : 1387
+          "top" : 102,
+          "left" : 266,
+          "bottom" : 888,
+          "right" : 1391
           }
         },
       "preferences" : {
@@ -72,7 +48,10 @@
           },
         "colorableComponents" : {
           "Interior" : {
-            "color" : "yellow"
+            "color" : "aqua"
+            },
+          "TextGObject_BackgroundContrast" : {
+            "color" : "rgb(251,166,23)"
             },
           "ActionButton" : {
             "color" : "rgb(255,128,0)"
@@ -97,7 +76,8 @@
             "Action" : {
               "label" : {
                 "font-family" : "\"Arial\", sans-serif",
-                "font-size" : 24
+                "font-size" : 24,
+                "color" : "rgb(162,217,99)"
                 }
               },
             "Table" : {
@@ -117,8 +97,8 @@
           "constraint" : "Free",
           "geom" : {
             "loc" : {
-              "x" : 453,
-              "y" : 385
+              "x" : 454.64647754024992,
+              "y" : 407.88146963613696
               }
             },
           "label" : "A",
@@ -136,8 +116,8 @@
           "constraint" : "Free",
           "geom" : {
             "loc" : {
-              "x" : 590,
-              "y" : 385
+              "x" : 592,
+              "y" : 407
               }
             },
           "label" : "H",
@@ -446,7 +426,6 @@
             },
           "constraint" : "PolygonFromPoints",
           "style" : {
-            "color" : "blue",
             "layerOrder" : 0,
             "framePerimeter" : true
             }
@@ -590,6 +569,7 @@
             },
           "constraint" : "PolygonFromPoints",
           "style" : {
+            "color" : "yellow",
             "layerOrder" : 1
             }
           },
@@ -612,7 +592,7 @@
             ],
           "animationStates" : [
             {
-              "rate" : 3,
+              "rate" : 1,
               "timeInterval" : 0,
               "repeat" : true,
               "motionType" : "forward"
@@ -634,6 +614,7 @@
             },
           "label" : "Area of Green Square",
           "style" : {
+            "color" : "rgb(255,165,0)",
             "precision" : 2,
             "nameOrigin" : "namedFromLabel"
             }
@@ -653,6 +634,7 @@
             },
           "label" : "Area of Blue Square",
           "style" : {
+            "color" : "rgb(255,165,0)",
             "precision" : 2,
             "nameOrigin" : "namedFromLabel"
             }
@@ -672,6 +654,7 @@
             },
           "label" : "Area of Red Square",
           "style" : {
+            "color" : "rgb(255,165,0)",
             "precision" : 2,
             "nameOrigin" : "namedFromLabel"
             }
@@ -712,6 +695,11 @@
               }
             },
           "label" : "Area of Blue + Area of Red",
+          "style" : {
+            "label" : {
+              "color" : "rgb(161,215,0)"
+              }
+            },
           "constraint" : "ActionButtonToggleHideShow",
           "messages" : [
             "Area of Blue + Area of Red",
@@ -734,7 +722,10 @@
               "y" : 277
               }
             },
-          "textMFS" : "<VL<H<T'Triangle  '><?1x1<SS2<T'A'>>><?1x2<SS2<T'I'>>><?1x3<SS2<T'H'>>><T' is a right-angled triangle.'>><0><T'1. Observe the areas of each of the squares that'><T'have been constructed on the sides of the'><T'right-angled triangle.'><0><T'2.  Click on the button above to calculate the Area of'><T'the Blue Square plus the Area of the Red square.'><0><T'3. What do you notice?'><0><T'4.  Click on the button to change the dimensions of'><T'the triangle.  Click the button again to stop.'><0><T'5. Observe the area mesurements again.  What do'><T'you notice now?'><0><T'6.  Repeat the steps 1 - 5 above  a few times.  What'><T'do you notice about the area measurements each'><T'time? '><0><T'7.  Try to write down a statement about a'><T'relationship between the areas of the squares that'><T'can be constructed on the sides of any right-angled'><T'triangle that you think might always be true.'><F110xx1C0x20x3212670x>>"
+          "textMFS" : "<VL<H<T'Triangle  '><?1x1<SS2<T'A'>>><?1x2<SS2<T'I'>>><?1x3<SS2<T'H'>>><T' is a right-angled triangle.'>><0><T'1. Observe the areas of each of the squares that'><T'have been constructed on the sides of the'><T'right-angled triangle.'><0><T'2.  Click on the button above to calculate the Area of'><T'the Blue Square plus the Area of the Red square.'><0><T'3. What do you notice?'><0><T'4.  Click on the button to change the dimensions of'><T'the triangle.  Click the button again to stop.'><0><T'5. Observe the area mesurements again.  What do'><T'you notice now?'><0><T'6.  Repeat the steps 1 - 5 above  a few times.  What'><T'do you notice about the area measurements each'><T'time? '><0><T'7.  Try to write down a statement about a'><T'relationship between the areas of the squares that'><T'can be constructed on the sides of any right-angled'><T'triangle that you think might always be true.'><F110xx1C0x20x3212670x>>",
+          "style" : {
+            "color" : "rgb(251,166,23)"
+            }
           },
         "45" : {
           "kind" : "AngleMarker",
@@ -746,7 +737,6 @@
             },
           "constraint" : "AngleMarker_Simple",
           "style" : {
-            "opacity" : 0.25,
             "show-angle-direction" : true
             }
           }

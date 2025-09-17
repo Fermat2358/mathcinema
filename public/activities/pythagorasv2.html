@@ -1,5 +1,29 @@
 <!DOCTYPE html>
     <html lang="en">
+      <style>
+  /* Make text readable on MathCinema's dark background */
+  html, body { background: transparent; }
+
+  /* Turn all typical text elements light */
+  body, p, li, h1, h2, h3, h4, label,
+  .instructions, .notes, .rightPanel {
+    color: #e5e7eb !important; /* slate-200 */
+  }
+
+  /* Optional: give the right-hand text panel a subtle backdrop */
+  .instructions, .notes, .rightPanel, .text-panel, .sidebar {
+    background: rgba(15, 23, 42, 0.55); /* semi-dark */
+    border-radius: 12px;
+    padding: 12px;
+  }
+
+  a { color: #93c5fd; } /* light-link color */
+  button {
+    background: #f59e0b; color: #111827;
+    border: 0; border-radius: 8px; padding: .5rem .75rem; font-weight: 600;
+  }
+</style>
+
           <head>
             <meta charset="utf-8" />
             <title>Web Sketchpad</title>

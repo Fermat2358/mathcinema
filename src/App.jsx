@@ -64,21 +64,28 @@ activityTitle: "Squares on a Right Triangle (Web Sketchpad)",
     tags: ["Primes", "Resilience", "Women in Maths"],
     embedSrc: "https://player.vimeo.com/video/1118489526?h=530df61cb5",
   },
-  {
-    id: "emmy",
-    title: "Emmy Noether – The Heartbeat of the Universe",
-    tagline: "Symmetry and invariance powering modern mathematics.",
-    priceGBP: 9.0,
-    duration: "Short film",
-    level: "KS4",
-    cover: "/posters/emmy.jpg",
-    purchaseLink: "https://buy.stripe.com/14A8wQdmI8IQ3qFaVJ8N202",
-    trailerLink: "#",
-    includes: ["Mastered 1080p MP4", "Teacher notes & scene prompts", "Captions (EN)"],
-    tags: ["Symmetry", "Algebra", "Women in Maths"],
-    embedSrc: "https://player.vimeo.com/video/1118491830?h=890a64cc3f",
-  },
-  
+{
+  id: "emmy",
+  title: "Emmy Noether — The Heartbeat of the Universe",
+  tagline: "Symmetry and invariance powering modern mathematics.",
+  priceGBP: 9.0,
+  duration: "Short film",
+  level: "KS4",
+  cover: "/posters/emmy.jpg",
+  purchaseLink: "https://buy.stripe.com/14A8wQdmI8IQ3qFaVJ8N202",
+  trailerLink: "#",
+  includes: ["Mastered 1080p MP4", "Teacher notes & scene prompts", "Captions (EN)"],
+  tags: ["Symmetry", "Algebra", "Women in Maths"],
+  embedSrc: "https://player.vimeo.com/video/1118491830?h=890a64cc3f",
+  activity: {
+    options: [
+      { key: "reflections", label: "Reflections", path: "/activities/emmy/reflections.html" },
+      { key: "rotations",   label: "Rotations",   path: "/activities/emmy/rotations.html" }
+    ],
+    defaultKey: "reflections"
+  }
+},
+
   {
   id: "galois",
   title: "Galois – The Fire of Algebra",

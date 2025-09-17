@@ -125,6 +125,8 @@ const currency = (n) => `£${Number(n).toFixed(2)} GBP`;
 /* ========= App ========= */
 export default function App() {
   const [showActivity, setShowActivity] = useState(false);
+const [activityKey, setActivityKey] = useState(null);
+
 
   // Route (read from hash, e.g. "#films", "#thanks?film=galois")
   const [route, setRoute] = useState(
@@ -133,6 +135,16 @@ export default function App() {
 
   // New: which film (if any) should the Thanks page show?
   const film = getThanksFilm(initialFilms);
+useEffect(() => {
+  // Pick default tab for this film (or first option), or null if none
+  setActivityKey(
+    film?.activity?.defaultKey ??
+    film?.activity?.options?.[0]?.key ??
+    null
+  );
+  // Close the drawer when the film changes
+  setShowActivity(false);
+}, [film?.id]);
 
   // New: detect "#thanks" even when it includes a query (?film=...)
   const onThanks = (route ?? "").split("?")[0] === "thanks";
@@ -180,13 +192,13 @@ export default function App() {
         {route === "about" && <About />}
         {route === "contact" && <Contact />}
 
-        {/* ===== /#thanks – Vimeo player based on ?film=<id> ===== */}
-       {onThanks && (
+       {/* ======= #thanks ======= */}
+{onThanks && (
   <section id="thanks" className="max-w-5xl mx-auto px-4 py-16 text-slate-100">
     <h2 className="text-3xl font-semibold mb-1">Thanks for your purchase!</h2>
     <p className="mb-6 opacity-80">{film ? film.title : ""}</p>
 
-    {/* If it's a bundle, render every film in the playlist */}
+    {/* 1) VIDEO: playlist -> single -> fallback */}
     {film?.embedPlaylist?.length ? (
       <div className="grid gap-10">
         {film.embedPlaylist
@@ -198,8 +210,8 @@ export default function App() {
                 <iframe
                   src={item.embedSrc}
                   className="absolute inset-0 h-full w-full"
+                  frameBorder="0"
                   allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                  allowFullScreen
                   referrerPolicy="strict-origin-when-cross-origin"
                   title={item.title}
                 />
@@ -209,62 +221,75 @@ export default function App() {
           ))}
       </div>
     ) : film?.embedSrc ? (
-      /* Single film (non-bundle) */
-      <>
-  {/* Vimeo player */}
-  <div className="relative pt-[56.25%] rounded-2xl overflow-hidden bg-slate-900 shadow-lg">
-    <iframe
-      src={film.embedSrc}
-      className="absolute inset-0 h-full w-full"
-      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-      allowFullScreen
-      referrerPolicy="strict-origin-when-cross-origin"
-      title={film.title}
-    />
-  </div>
-
-  {/* Activity toggle (only if this film has an activity) */}
-  {film?.activityPath && (
-    <div className="mt-6">
-      <button
-        onClick={() => setShowActivity(v => !v)}
-        className="inline-flex items-center gap-2 rounded-lg bg-amber-500/90 hover:bg-amber-500 text-slate-900 font-semibold px-4 py-2 transition"
-      >
-        {showActivity ? "Hide activity" : "Open interactive activity"}
-      </button>
-
-      {showActivity ? (
-        <div className="relative pt-[75%] mt-4 rounded-2xl overflow-hidden bg-slate-900 shadow-lg">
-          <iframe
-            src={film.activityPath}
-            className="absolute inset-0 h-full w-full"
-            title={`${film.title} — activity`}
-            allowFullScreen
-          />
-        </div>
-      ) : (
-        <p className="mt-2 opacity-60 text-sm">
-          Explore the maths hands-on in the activity.
-        </p>
-      )}
-    </div>
-  )}
-</>
-
+      <div className="relative pt-[56.25%] rounded-2xl overflow-hidden bg-slate-900 shadow-lg">
+        <iframe
+          src={film.embedSrc}
+          className="absolute inset-0 h-full w-full"
+          frameBorder="0"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          title={film.title}
+        />
+      </div>
     ) : (
       <p className="opacity-80">
-        We couldn’t find a streaming link for this purchase. If you just paid, please use the link in your receipt
-        or email <a className="underline" href="mailto:gerrydoch@gmail.com">gerrydoch@gmail.com</a>.
+        We couldn’t find a streaming link for this purchase. If you just paid, please use the
+        link in your receipt or email <a className="underline" href="mailto:gerrydoch@gmail.com">gerrydoch@gmail.com</a>.
       </p>
     )}
 
+    {/* 2) ACTIVITY: tabs + drawer */}
+    {film?.activity?.options?.length ? (
+      <div className="mt-6">
+        {/* tab buttons */}
+        <div className="mb-3 flex gap-2 flex-wrap">
+          {film.activity.options.map(opt => (
+            <button
+              key={opt.key}
+              onClick={() => { setActivityKey(opt.key); setShowActivity(true); }}
+              className={`px-3 py-1 rounded-lg border transition ${
+                activityKey === opt.key
+                  ? "bg-amber-500 text-slate-900 border-amber-500"
+                  : "border-amber-500 text-amber-300 hover:text-amber-200"
+              }`}
+            >
+              {opt.label}
+            </button>
+          ))}
+          <button
+            onClick={() => setShowActivity(v => !v)}
+            className="ml-auto rounded-lg bg-amber-500/90 hover:bg-amber-500 text-slate-900 font-semibold px-4 py-2"
+          >
+            {showActivity ? "Hide activity" : "Open interactive activity"}
+          </button>
+        </div>
+
+        {/* activity iframe */}
+        {showActivity && activityKey && (
+          <div className="relative pt-[75%] rounded-2xl overflow-hidden bg-slate-900 shadow-lg">
+            <iframe
+              src={film.activity.options.find(o => o.key === activityKey)?.path}
+              className="absolute inset-0 h-full w-full"
+              title={`${film.title} — ${activityKey} activity`}
+              allowFullScreen
+            />
+          </div>
+        )}
+      </div>
+    ) : null}
+
+    {/* 3) Back link */}
     <div className="mt-6">
-      <a href="#films" className="inline-flex items-center rounded-lg bg-sky-500 px-4 py-2 font-medium text-white hover:bg-sky-600">
+      <a
+        href="#films"
+        className="inline-flex items-center rounded-lg bg-sky-500 text-slate-900 font-semibold px-3 py-2"
+      >
         ← Back to Films
       </a>
     </div>
   </section>
 )}
+
 
         {/* ===== end /#thanks ===== */}
       </main>

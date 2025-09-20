@@ -9,764 +9,31 @@
             <script charset="utf-8" type="text/javascript">
                 var sketch = {
   "metadata" : {
-    "width" : 1873,
-    "height" : 1106,
+    "width" : 1124,
+    "height" : 865,
     "wsp-version" : "4.8.0",
     "exporter-version" : "5.10",
     "exporter-build" : "3058",
     "exporter-debug" : false,
-    "original-document-name" : "Rotations",
+    "original-document-name" : "rotations",
     "start-page" : "1"
     },
   "resources" : {
     "fontList" : [
-      "\"Times New Roman\", serif",
       "\"Arial\", sans-serif",
-      "\"Comic Sans MS\", "
+      "\"Times New Roman\", serif"
       ]
     },
   "pages" : [
     {
       "metadata" : {
-        "title" : "Reflections",
+        "title" : "Rotations",
         "id" : "1",
         "sketchRect" : {
-          "top" : 35,
-          "left" : 117,
-          "bottom" : 1141,
-          "right" : 1990
-          }
-        },
-      "preferences" : {
-        "units" : {
-          "length" : "cm",
-          "angle" : "deg"
-          },
-        "precision" : {
-          "length" : 2,
-          "angle" : 0,
-          "scalar" : 2
-          },
-        "colorableComponents" : {
-          "Straights" : {
-            "color" : "fuchsia"
-            },
-          "Interior" : {
-            "color" : "yellow"
-            },
-          "ActionButton" : {
-            "color" : "rgb(255,128,0)"
-            }
-          },
-        "text" : {
-          "mathItalicization" : true,
-          "textTypes" : {
-            "Label" : {
-              "font-family" : "\"Times New Roman\", serif",
-              "color" : "red"
-              },
-            "Caption" : {
-              "font-family" : "\"Arial\", sans-serif",
-              "font-size" : 36,
-              "font-weight" : "bold",
-              "font-style" : "italic",
-              "color" : "rgb(255,128,0)"
-              },
-            "Measurement" : {
-              "font-family" : "\"Times New Roman\", serif",
-              "font-weight" : "bold",
-              "color" : "rgb(249,159,4)"
-              },
-            "Action" : {
-              "label" : {
-                "font-family" : "\"Arial\", sans-serif",
-                "font-size" : 24,
-                "color" : "rgb(171,243,82)"
-                }
-              },
-            "Table" : {
-              "font-family" : "\"Arial\", sans-serif",
-              "font-size" : 24
-              },
-            "AxisTicksAndOptionalLabel" : {
-              "font-family" : "\"Arial\", sans-serif"
-              }
-            }
-          }
-        },
-      "objects" : {
-        "1" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 454,
-              "y" : 439
-              }
-            },
-          "label" : "A",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : -30,
-              "labelOffsetY" : -2,
-              "font-size" : 36,
-              "color" : "rgb(140,248,245)"
-              }
-            }
-          },
-        "2" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 619,
-              "y" : 438
-              }
-            },
-          "label" : "B",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : -2,
-              "labelOffsetY" : 5,
-              "font-size" : 36,
-              "color" : "aqua"
-              }
-            }
-          },
-        "3" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "p0" : "1",
-            "p1" : "2"
-            },
-          "constraint" : "Segment",
-          "style" : {
-            "color" : "navy"
-            }
-          },
-        "4" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "source" : "3",
-            "center" : "1"
-            },
-          "angle" : -1.5707963267949001,
-          "constraint" : "Rotate",
-          "shouldAutogenerateLabel" : true,
-          "style" : {
-            "color" : "navy"
-            }
-          },
-        "5" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "parents" : {
-            "source" : "2",
-            "center" : "1"
-            },
-          "angle" : -1.5707963267949001,
-          "constraint" : "Rotate",
-          "label" : "D",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : -24,
-              "labelOffsetY" : -44,
-              "font-size" : 36,
-              "color" : "rgb(140,248,245)"
-              }
-            }
-          },
-        "6" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "source" : "4",
-            "center" : "5"
-            },
-          "angle" : -1.5707963267949001,
-          "constraint" : "Rotate",
-          "shouldAutogenerateLabel" : true,
-          "style" : {
-            "color" : "navy"
-            }
-          },
-        "7" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "parents" : {
-            "source" : "1",
-            "center" : "5"
-            },
-          "angle" : -1.5707963267949001,
-          "constraint" : "Rotate",
-          "label" : "C",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : 8,
-              "labelOffsetY" : -44,
-              "font-size" : 36,
-              "color" : "rgb(140,248,245)"
-              }
-            }
-          },
-        "8" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "source" : "6",
-            "center" : "7"
-            },
-          "angle" : -1.5707963267949001,
-          "constraint" : "Rotate",
-          "shouldAutogenerateLabel" : true,
-          "style" : {
-            "color" : "navy"
-            }
-          },
-        "9" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "parents" : {
-            "source" : "5",
-            "center" : "7"
-            },
-          "angle" : -1.5707963267949001,
-          "constraint" : "Rotate",
-          "shouldAutogenerateLabel" : true
-          },
-        "10" : {
-          "kind" : "Polygon",
-          "genus" : "Quadrilateral",
-          "parents" : {
-            "0" : "1",
-            "1" : "9",
-            "2" : "7",
-            "3" : "5"
-            },
-          "constraint" : "PolygonFromPoints",
-          "style" : {
-            "layerOrder" : 0
-            }
-          },
-        "11" : {
-          "kind" : "Straight",
-          "genus" : "Ray",
-          "parents" : {
-            "p0" : "1",
-            "p1" : "9"
-            },
-          "constraint" : "Ray",
-          "style" : {
-            "hidden" : true,
-            "color" : "navy"
-            }
-          },
-        "12" : {
-          "kind" : "Point",
-          "genus" : "PointOnPath",
-          "parents" : {
-            "path" : "11"
-            },
-          "value" : 1.9337557399307903,
-          "constraint" : "PointOnPath",
-          "style" : {
-            "hidden" : true
-            }
-          },
-        "13" : {
-          "kind" : "Straight",
-          "genus" : "Perpendicular",
-          "parents" : {
-            "p0" : "12",
-            "line" : "11"
-            },
-          "constraint" : "Perpendicular",
-          "label" : "L: Axis of Reflection",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : 8,
-              "labelOffsetY" : 0,
-              "labelParam" : -1.2140233600235069
-              },
-            "line-style" : "dashed"
-            }
-          },
-        "14" : {
-          "kind" : "Measure",
-          "genus" : "DistanceMeasure",
-          "parents" : {
-            "p0" : "7",
-            "obj0" : "13"
-            },
-          "constraint" : "MeasurementDistance",
-          "geom" : {
-            "loc" : {
-              "x" : 139,
-              "y" : 220
-              }
-            },
-          "latentVisibility" : true,
-          "label" : "Distance from C to L",
-          "style" : {
-            "hidden" : true,
-            "precision" : 2,
-            "nameOrigin" : "namedFromLabel"
-            }
-          },
-        "15" : {
-          "kind" : "Measure",
-          "genus" : "DistanceMeasure",
-          "parents" : {
-            "p0" : "5",
-            "obj0" : "13"
-            },
-          "constraint" : "MeasurementDistance",
-          "geom" : {
-            "loc" : {
-              "x" : 138,
-              "y" : 253
-              }
-            },
-          "latentVisibility" : true,
-          "label" : "Distance from D to L",
-          "style" : {
-            "hidden" : true,
-            "precision" : 2,
-            "nameOrigin" : "namedFromLabel"
-            }
-          },
-        "16" : {
-          "kind" : "Measure",
-          "genus" : "DistanceMeasure",
-          "parents" : {
-            "p0" : "1",
-            "obj0" : "13"
-            },
-          "constraint" : "MeasurementDistance",
-          "geom" : {
-            "loc" : {
-              "x" : 138,
-              "y" : 162
-              }
-            },
-          "latentVisibility" : true,
-          "label" : "Distance from A to L",
-          "style" : {
-            "hidden" : true,
-            "precision" : 2,
-            "nameOrigin" : "namedFromLabel"
-            }
-          },
-        "17" : {
-          "kind" : "Measure",
-          "genus" : "DistanceMeasure",
-          "parents" : {
-            "p0" : "2",
-            "obj0" : "13"
-            },
-          "constraint" : "MeasurementDistance",
-          "geom" : {
-            "loc" : {
-              "x" : 141,
-              "y" : 192
-              }
-            },
-          "latentVisibility" : true,
-          "label" : "Distance from B to L",
-          "style" : {
-            "hidden" : true,
-            "precision" : 2,
-            "nameOrigin" : "namedFromLabel"
-            }
-          },
-        "18" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "parents" : {
-            "source" : "1",
-            "mirror" : "13"
-            },
-          "constraint" : "Reflect",
-          "shouldAutogenerateLabel" : true,
-          "latentVisibility" : true,
-          "label" : "A'",
-          "style" : {
-            "hidden" : true,
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : 8,
-              "labelOffsetY" : 5,
-              "font-size" : 36,
-              "color" : "aqua"
-              }
-            }
-          },
-        "19" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "parents" : {
-            "source" : "2",
-            "mirror" : "13"
-            },
-          "constraint" : "Reflect",
-          "shouldAutogenerateLabel" : true,
-          "latentVisibility" : true,
-          "label" : "B'",
-          "style" : {
-            "hidden" : true,
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : -40,
-              "labelOffsetY" : 4,
-              "font-size" : 36,
-              "color" : "aqua"
-              }
-            }
-          },
-        "20" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "source" : "3",
-            "mirror" : "13"
-            },
-          "constraint" : "Reflect",
-          "shouldAutogenerateLabel" : true,
-          "latentVisibility" : true,
-          "style" : {
-            "hidden" : true,
-            "color" : "navy"
-            }
-          },
-        "21" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "source" : "4",
-            "mirror" : "13"
-            },
-          "constraint" : "Reflect",
-          "shouldAutogenerateLabel" : true,
-          "latentVisibility" : true,
-          "style" : {
-            "hidden" : true,
-            "color" : "navy"
-            }
-          },
-        "22" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "parents" : {
-            "source" : "5",
-            "mirror" : "13"
-            },
-          "constraint" : "Reflect",
-          "shouldAutogenerateLabel" : true,
-          "latentVisibility" : true,
-          "label" : "D'",
-          "style" : {
-            "hidden" : true,
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : 8,
-              "labelOffsetY" : -29,
-              "font-size" : 36,
-              "color" : "aqua"
-              }
-            }
-          },
-        "23" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "source" : "6",
-            "mirror" : "13"
-            },
-          "constraint" : "Reflect",
-          "shouldAutogenerateLabel" : true,
-          "latentVisibility" : true,
-          "style" : {
-            "hidden" : true,
-            "color" : "navy"
-            }
-          },
-        "24" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "parents" : {
-            "source" : "7",
-            "mirror" : "13"
-            },
-          "constraint" : "Reflect",
-          "shouldAutogenerateLabel" : true,
-          "latentVisibility" : true,
-          "label" : "C'",
-          "style" : {
-            "hidden" : true,
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : -47,
-              "labelOffsetY" : -25,
-              "font-size" : 36,
-              "color" : "aqua"
-              }
-            }
-          },
-        "25" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "source" : "8",
-            "mirror" : "13"
-            },
-          "constraint" : "Reflect",
-          "shouldAutogenerateLabel" : true,
-          "latentVisibility" : true,
-          "style" : {
-            "hidden" : true,
-            "color" : "navy"
-            }
-          },
-        "26" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "parents" : {
-            "source" : "9",
-            "mirror" : "13"
-            },
-          "constraint" : "Reflect",
-          "shouldAutogenerateLabel" : true,
-          "latentVisibility" : true,
-          "style" : {
-            "hidden" : true
-            }
-          },
-        "27" : {
-          "kind" : "Polygon",
-          "genus" : "Quadrilateral",
-          "parents" : {
-            "source" : "10",
-            "mirror" : "13"
-            },
-          "constraint" : "Reflect",
-          "shouldAutogenerateLabel" : true,
-          "latentVisibility" : true,
-          "style" : {
-            "hidden" : true,
-            "layerOrder" : 1
-            }
-          },
-        "28" : {
-          "kind" : "Button",
-          "genus" : "Action",
-          "parents" : {
-            "0" : "18",
-            "1" : "19",
-            "2" : "20",
-            "3" : "21",
-            "4" : "22",
-            "5" : "23",
-            "6" : "24",
-            "7" : "25",
-            "8" : "26",
-            "9" : "27"
-            },
-          "geom" : {
-            "loc" : {
-              "x" : 1222,
-              "y" : 85
-              }
-            },
-          "label" : "Show A'B'C'D'",
-          "constraint" : "ActionButtonToggleHideShow",
-          "messages" : [
-            "Hide A'B'C'D'",
-            "Show A'B'C'D'"
-            ],
-          "fade" : true
-          },
-        "29" : {
-          "kind" : "Measure",
-          "genus" : "DistanceMeasure",
-          "parents" : {
-            "p0" : "24",
-            "obj0" : "13"
-            },
-          "constraint" : "MeasurementDistance",
-          "geom" : {
-            "loc" : {
-              "x" : 1224,
-              "y" : 277
-              }
-            },
-          "latentVisibility" : true,
-          "label" : "Distance from C' to L",
-          "style" : {
-            "hidden" : true,
-            "precision" : 2,
-            "nameOrigin" : "namedFromLabel"
-            }
-          },
-        "30" : {
-          "kind" : "Measure",
-          "genus" : "DistanceMeasure",
-          "parents" : {
-            "p0" : "22",
-            "obj0" : "13"
-            },
-          "constraint" : "MeasurementDistance",
-          "geom" : {
-            "loc" : {
-              "x" : 1222,
-              "y" : 312
-              }
-            },
-          "latentVisibility" : true,
-          "label" : "Distance from D' to L",
-          "style" : {
-            "hidden" : true,
-            "precision" : 2,
-            "nameOrigin" : "namedFromLabel"
-            }
-          },
-        "31" : {
-          "kind" : "Measure",
-          "genus" : "DistanceMeasure",
-          "parents" : {
-            "p0" : "18",
-            "obj0" : "13"
-            },
-          "constraint" : "MeasurementDistance",
-          "geom" : {
-            "loc" : {
-              "x" : 1226,
-              "y" : 201
-              }
-            },
-          "latentVisibility" : true,
-          "label" : "Distance from A' to L",
-          "style" : {
-            "hidden" : true,
-            "precision" : 2,
-            "nameOrigin" : "namedFromLabel"
-            }
-          },
-        "32" : {
-          "kind" : "Measure",
-          "genus" : "DistanceMeasure",
-          "parents" : {
-            "p0" : "19",
-            "obj0" : "13"
-            },
-          "constraint" : "MeasurementDistance",
-          "geom" : {
-            "loc" : {
-              "x" : 1225,
-              "y" : 233
-              }
-            },
-          "latentVisibility" : true,
-          "label" : "Distance from B' to L",
-          "style" : {
-            "hidden" : true,
-            "precision" : 2,
-            "nameOrigin" : "namedFromLabel"
-            }
-          },
-        "33" : {
-          "kind" : "Button",
-          "genus" : "Action",
-          "parents" : {
-            "0" : "14",
-            "1" : "15",
-            "2" : "16",
-            "3" : "17"
-            },
-          "geom" : {
-            "loc" : {
-              "x" : 152,
-              "y" : 107
-              }
-            },
-          "label" : "Distances to L",
-          "constraint" : "ActionButtonToggleHideShow",
-          "messages" : [
-            "Distances to L",
-            "Distances to L"
-            ],
-          "fade" : true
-          },
-        "34" : {
-          "kind" : "Button",
-          "genus" : "Action",
-          "parents" : {
-            "0" : "29",
-            "1" : "30",
-            "2" : "31",
-            "3" : "32"
-            },
-          "geom" : {
-            "loc" : {
-              "x" : 1229,
-              "y" : 153
-              }
-            },
-          "label" : " Distances of Image Points to L ",
-          "constraint" : "ActionButtonToggleHideShow",
-          "messages" : [
-            " Distances of Image Points to L ",
-            " Distances of Image Points to L "
-            ],
-          "fade" : true
-          },
-        "35" : {
-          "kind" : "Text",
-          "genus" : "Caption",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 136,
-              "y" : 570
-              }
-            },
-          "textMFS" : "<VL<T'1. Click on the button to show the image of ABCD under a reflection'><T'in the line L.'><0><T'2. Click on the buttons to show the distances.'><0><T'3. What do you notice?'><0><T'4. Click and drag point B to a new location.'><0><T'5. What do you notice now?'><0><T'6.  Under a reflection, what changes and what stays the same?'><F1Cxx203x20x800x>>",
-          "style" : {
-            "font-size" : 16,
-            "color" : "rgb(249,159,4)"
-            }
-          },
-        "36" : {
-          "kind" : "Text",
-          "genus" : "Caption",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 800,
-              "y" : 41
-              }
-            },
-          "textMFS" : "<T'Reflections'>"
-          }
-        }
-      },
-    {
-      "metadata" : {
-        "title" : "Rotations",
-        "id" : "2",
-        "sketchRect" : {
-          "top" : -54,
-          "left" : 212,
-          "bottom" : 1052,
-          "right" : 2085
+          "top" : -53,
+          "left" : 490,
+          "bottom" : 812,
+          "right" : 1614
           }
         },
       "preferences" : {
@@ -781,7 +48,7 @@
           },
         "colorableComponents" : {
           "Interior" : {
-            "color" : "red"
+            "color" : "lime"
             },
           "ActionButton" : {
             "color" : "rgb(255,128,0)"
@@ -791,7 +58,8 @@
           "mathItalicization" : true,
           "textTypes" : {
             "Label" : {
-              "font-family" : "\"Times New Roman\", serif"
+              "font-family" : "\"Times New Roman\", serif",
+              "color" : "aqua"
               },
             "Caption" : {
               "font-family" : "\"Arial\", sans-serif",
@@ -824,653 +92,18 @@
         },
       "objects" : {
         "1" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 290.4671758022514,
-              "y" : 353.0580326124134
-              }
-            },
-          "label" : "I",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : -14,
-              "labelOffsetY" : -28
-              }
-            }
-          },
-        "2" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 447.4671758022514,
-              "y" : 373.0580326124134
-              }
-            },
-          "label" : "F",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : -6,
-              "labelOffsetY" : -31
-              }
-            }
-          },
-        "3" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 369.4671758022514,
-              "y" : 497.0580326124134
-              }
-            },
-          "label" : "G",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : 1,
-              "labelOffsetY" : 1
-              }
-            }
-          },
-        "4" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 368.2796490473566,
-              "y" : 409.9287265880314
-              }
-            },
-          "label" : "H",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : -27,
-              "labelOffsetY" : -6
-              }
-            }
-          },
-        "5" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 660,
-              "y" : 125
-              }
-            },
-          "label" : "O",
-          "style" : {
-            "hidden" : true,
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : 8,
-              "labelOffsetY" : 5
-              }
-            }
-          },
-        "6" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 719,
-              "y" : 125
-              }
-            },
-          "label" : "A",
-          "style" : {
-            "hidden" : true,
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : -9,
-              "labelOffsetY" : 5
-              }
-            }
-          },
-        "7" : {
-          "kind" : "Circle",
-          "genus" : "Circle",
-          "parents" : {
-            "p0" : "5",
-            "p1" : "6"
-            },
-          "constraint" : "CircleFromTwoPoints",
-          "style" : {
-            "hidden" : true,
-            "line-style" : "dashed"
-            }
-          },
-        "8" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "parents" : {
-            "source" : "6",
-            "center" : "5"
-            },
-          "angle" : -1.5707963267949001,
-          "constraint" : "Rotate",
-          "label" : "B",
-          "style" : {
-            "hidden" : true,
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : -27,
-              "labelOffsetY" : -13
-              }
-            }
-          },
-        "9" : {
-          "kind" : "Arc",
-          "genus" : "SimpleArc",
-          "parents" : {
-            "circle" : "7",
-            "p0" : "6",
-            "p1" : "8"
-            },
-          "constraint" : "ArcOnCircle",
-          "style" : {
-            "hidden" : true
-            }
-          },
-        "10" : {
-          "kind" : "Point",
-          "genus" : "PointOnPath",
-          "parents" : {
-            "path" : "9"
-            },
-          "value" : 0,
-          "constraint" : "PointOnPath",
-          "label" : "C",
-          "style" : {
-            "hidden" : true,
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : 4,
-              "labelOffsetY" : -24
-              }
-            }
-          },
-        "11" : {
-          "kind" : "Button",
-          "genus" : "Action",
-          "parents" : {
-            "0" : "8",
-            "1" : "10"
-            },
-          "geom" : {
-            "loc" : {
-              "x" : 234,
-              "y" : 55
-              }
-            },
-          "label" : "Rotate from 0 to 90 Degrees",
-          "style" : {
-            "label" : {
-              "color" : "rgb(181,228,67)"
-              }
-            },
-          "constraint" : "ActionButtonMove",
-          "messages" : [
-            "Rotate from 0 to 90 Degrees"
-            ],
-          "rate" : 1
-          },
-        "12" : {
-          "kind" : "Button",
-          "genus" : "Action",
-          "parents" : {
-            "0" : "6",
-            "1" : "10"
-            },
-          "geom" : {
-            "loc" : {
-              "x" : 908,
-              "y" : 48
-              }
-            },
-          "label" : "Reset Angle of Rotation",
-          "constraint" : "ActionButtonMove",
-          "messages" : [
-            "Reset Angle of Rotation"
-            ],
-          "rate" : 0
-          },
-        "13" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "p0" : "4",
-            "p1" : "1"
-            },
-          "constraint" : "Segment"
-          },
-        "14" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "p0" : "1",
-            "p1" : "2"
-            },
-          "constraint" : "Segment"
-          },
-        "15" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "p0" : "2",
-            "p1" : "3"
-            },
-          "constraint" : "Segment"
-          },
-        "16" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "p0" : "3",
-            "p1" : "4"
-            },
-          "constraint" : "Segment"
-          },
-        "17" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 641,
-              "y" : 228
-              }
-            },
-          "label" : "O",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : 4,
-              "labelOffsetY" : -25
-              }
-            }
-          },
-        "18" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "parents" : {
-            "source" : "1",
-            "center" : "17",
-            "A" : "6",
-            "B" : "5",
-            "C" : "10"
-            },
-          "constraint" : "Rotate3",
-          "shouldAutogenerateLabel" : true,
-          "label" : "I'",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : -27,
-              "labelOffsetY" : -8
-              }
-            }
-          },
-        "19" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "parents" : {
-            "source" : "2",
-            "center" : "17",
-            "A" : "6",
-            "B" : "5",
-            "C" : "10"
-            },
-          "constraint" : "Rotate3",
-          "shouldAutogenerateLabel" : true,
-          "label" : "F'",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : -33,
-              "labelOffsetY" : -16
-              }
-            }
-          },
-        "20" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "parents" : {
-            "source" : "3",
-            "center" : "17",
-            "A" : "6",
-            "B" : "5",
-            "C" : "10"
-            },
-          "constraint" : "Rotate3",
-          "shouldAutogenerateLabel" : true,
-          "label" : "G'",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : 8,
-              "labelOffsetY" : 5
-              }
-            }
-          },
-        "21" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "parents" : {
-            "source" : "4",
-            "center" : "17",
-            "A" : "6",
-            "B" : "5",
-            "C" : "10"
-            },
-          "constraint" : "Rotate3",
-          "shouldAutogenerateLabel" : true,
-          "label" : "H'",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : -23,
-              "labelOffsetY" : 5
-              }
-            }
-          },
-        "22" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "source" : "13",
-            "center" : "17",
-            "A" : "6",
-            "B" : "5",
-            "C" : "10"
-            },
-          "constraint" : "Rotate3",
-          "shouldAutogenerateLabel" : true
-          },
-        "23" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "source" : "14",
-            "center" : "17",
-            "A" : "6",
-            "B" : "5",
-            "C" : "10"
-            },
-          "constraint" : "Rotate3",
-          "shouldAutogenerateLabel" : true
-          },
-        "24" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "source" : "15",
-            "center" : "17",
-            "A" : "6",
-            "B" : "5",
-            "C" : "10"
-            },
-          "constraint" : "Rotate3",
-          "shouldAutogenerateLabel" : true
-          },
-        "25" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "source" : "16",
-            "center" : "17",
-            "A" : "6",
-            "B" : "5",
-            "C" : "10"
-            },
-          "constraint" : "Rotate3",
-          "shouldAutogenerateLabel" : true
-          },
-        "26" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "p0" : "2",
-            "p1" : "17"
-            },
-          "constraint" : "Segment",
-          "latentVisibility" : true,
-          "style" : {
-            "hidden" : true,
-            "line-style" : "dashed"
-            }
-          },
-        "27" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "p0" : "17",
-            "p1" : "19"
-            },
-          "constraint" : "Segment",
-          "latentVisibility" : true,
-          "style" : {
-            "hidden" : true,
-            "line-style" : "dashed"
-            }
-          },
-        "28" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "p0" : "6",
-            "p1" : "5"
-            },
-          "constraint" : "Segment",
-          "style" : {
-            "hidden" : true,
-            "line-style" : "dashed"
-            }
-          },
-        "29" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "p0" : "5",
-            "p1" : "10"
-            },
-          "constraint" : "Segment",
-          "style" : {
-            "hidden" : true,
-            "line-style" : "dashed"
-            }
-          },
-        "30" : {
-          "kind" : "AngleMarker",
-          "genus" : "AngleMarker",
-          "parents" : {
-            "p0" : "6",
-            "p1" : "5",
-            "p2" : "10"
-            },
-          "constraint" : "AngleMarker_Simple",
-          "style" : {
-            "hidden" : true,
-            "show-angle-direction" : true
-            }
-          },
-        "31" : {
-          "kind" : "Measure",
-          "genus" : "AngleMeasure",
-          "parents" : {
-            "marker" : "30"
-            },
-          "constraint" : "MeasurementAngleMarker",
-          "geom" : {
-            "loc" : {
-              "x" : 572,
-              "y" : 60
-              }
-            },
-          "label" : "Angle of Rotation",
-          "style" : {
-            "precision" : 0,
-            "nameOrigin" : "namedFromLabel"
-            }
-          },
-        "32" : {
-          "kind" : "AngleMarker",
-          "genus" : "AngleMarker",
-          "parents" : {
-            "p0" : "2",
-            "p1" : "17",
-            "p2" : "19"
-            },
-          "constraint" : "AngleMarker_Simple",
-          "style" : {
-            "show-angle-direction" : true
-            }
-          },
-        "33" : {
-          "kind" : "Measure",
-          "genus" : "AngleMeasure",
-          "parents" : {
-            "marker" : "32"
-            },
-          "constraint" : "MeasurementAngleMarker",
-          "geom" : {
-            "loc" : {
-              "x" : 223,
-              "y" : 165
-              }
-            },
-          "latentVisibility" : true,
-          "style" : {
-            "hidden" : true,
-            "color" : "black",
-            "precision" : 0,
-            "nameOrigin" : "namedFromTemplate"
-            }
-          },
-        "34" : {
-          "kind" : "Measure",
-          "genus" : "AngleMeasure",
-          "parents" : {
-            "p0" : "3",
-            "p1" : "17",
-            "p2" : "20"
-            },
-          "constraint" : "MeasurementAngle",
-          "geom" : {
-            "loc" : {
-              "x" : 223,
-              "y" : 187
-              }
-            },
-          "latentVisibility" : true,
-          "style" : {
-            "hidden" : true,
-            "color" : "black",
-            "precision" : 0,
-            "nameOrigin" : "namedFromTemplate"
-            }
-          },
-        "35" : {
-          "kind" : "Measure",
-          "genus" : "AngleMeasure",
-          "parents" : {
-            "p0" : "4",
-            "p1" : "17",
-            "p2" : "21"
-            },
-          "constraint" : "MeasurementAngle",
-          "geom" : {
-            "loc" : {
-              "x" : 223,
-              "y" : 209
-              }
-            },
-          "latentVisibility" : true,
-          "style" : {
-            "hidden" : true,
-            "color" : "black",
-            "precision" : 0,
-            "nameOrigin" : "namedFromTemplate"
-            }
-          },
-        "36" : {
-          "kind" : "Measure",
-          "genus" : "AngleMeasure",
-          "parents" : {
-            "p0" : "1",
-            "p1" : "17",
-            "p2" : "18"
-            },
-          "constraint" : "MeasurementAngle",
-          "geom" : {
-            "loc" : {
-              "x" : 223,
-              "y" : 231
-              }
-            },
-          "latentVisibility" : true,
-          "style" : {
-            "hidden" : true,
-            "color" : "black",
-            "precision" : 0,
-            "nameOrigin" : "namedFromTemplate"
-            }
-          },
-        "37" : {
-          "kind" : "Button",
-          "genus" : "Action",
-          "parents" : {
-            "0" : "33",
-            "1" : "34",
-            "2" : "35",
-            "3" : "36",
-            "4" : "26",
-            "5" : "27"
-            },
-          "geom" : {
-            "loc" : {
-              "x" : 229,
-              "y" : 113
-              }
-            },
-          "label" : "Angles Made with Centre of Rotation",
-          "style" : {
-            "label" : {
-              "color" : "rgb(156,223,60)"
-              }
-            },
-          "constraint" : "ActionButtonToggleHideShow",
-          "messages" : [
-            "Angles Made with Centre of Rotation",
-            "Angles Made with Centre of Rotation"
-            ],
-          "fade" : true
-          },
-        "38" : {
           "kind" : "Text",
           "genus" : "Caption",
           "constraint" : "Free",
           "geom" : {
             "loc" : {
-              "x" : 802,
-              "y" : 177
+              "x" : 615,
+              "y" : 82
               }
             },
-          "textMFS" : "<VL<0><S#12<T'How to Explore...'>><0><T'1. Click on the button to rotate the shape through an angle'><T'between 0 and 90 degrees.'><0><T'2. Click on the button to show the Angles made with the'><T'Centre of Rotation O.'><0><T'2. Click on the button to show the image of FGHI under a'><T'rotation about Centre of Rotation O.'><0><T'3. What do you notice?'><0><T'4. Click and drag point any of points FGHI  to create a  new'><T'quadrilateral.'><0><T'5. Reset the angle of rotation by clicking on the button and'><T'repeat the process above for your new shape.'><0><T'6. What do you notice now?'><0><T'7.  Under a rotation, what changes and what stays the same?'><0><0><F110xx196x20x1242400x>>"
+          "textMFS" : "<VL<0><S#12<T'How to Explore...'>><0><T'1. Click on the button to rotate the shape through an angle'><H<T'between 0 and 90 '><!B0><T'.'>><0><T'2. Click on the button Click on the button to stop the rotation'><H<T'when the angle reaches 90'><!B0><T'.  You can also drrag point N to'>><H<T'help you set the angle to 90'><!B0><T' exactly.'>><0><T'3. What do you notice?'><0><T'4. Can you think of another angle where this happens again?'><0><T'5. Click on the button again or continue to drag point N in an'><T'anti-clockwise direction and stop when you have reached'><T'the angle that you predicted.'><0><T'6. Does this happen again for any other angles of rotation?'><0><T'7.  How many times does this happen for a square in one'><T'complete revolution?'><0><F1Fxx195x20x130308x>>"
           },
-        "39" : {
+        "2" : {
           "kind" : "Text",
           "genus" : "Caption",
           "constraint" : "Free",
@@ -1485,137 +118,22 @@
             "font-size" : 36
             }
           },
-        "40" : {
-          "kind" : "Polygon",
-          "genus" : "Quadrilateral",
-          "parents" : {
-            "0" : "1",
-            "1" : "21",
-            "2" : "3",
-            "3" : "2"
-            },
-          "constraint" : "PolygonFromPoints",
-          "style" : {
-            "layerOrder" : 0
-            }
-          }
-        }
-      },
-    {
-      "metadata" : {
-        "title" : "Translations",
-        "id" : "3",
-        "sketchRect" : {
-          "top" : -118,
-          "left" : 25,
-          "bottom" : 987,
-          "right" : 1772
-          }
-        },
-      "preferences" : {
-        "units" : {
-          "length" : "cm",
-          "angle" : "deg"
-          },
-        "precision" : {
-          "length" : 2,
-          "angle" : 0,
-          "scalar" : 2
-          },
-        "colorableComponents" : {
-          "Interior" : {
-            "color" : "red"
-            },
-          "ActionButton" : {
-            "color" : "rgb(255,128,0)"
-            }
-          },
-        "text" : {
-          "mathItalicization" : true,
-          "textTypes" : {
-            "Label" : {
-              "font-family" : "\"Times New Roman\", serif"
-              },
-            "Caption" : {
-              "font-family" : "\"Arial\", sans-serif",
-              "font-weight" : "bold",
-              "font-style" : "italic"
-              },
-            "Measurement" : {
-              "font-family" : "\"Times New Roman\", serif",
-              "font-weight" : "bold"
-              },
-            "Action" : {
-              "label" : {
-                "font-family" : "\"Arial\", sans-serif",
-                "font-size" : 24
-                }
-              },
-            "Table" : {
-              "font-family" : "\"Arial\", sans-serif",
-              "font-size" : 24
-              },
-            "AxisTicksAndOptionalLabel" : {
-              "font-family" : "\"Arial\", sans-serif"
-              }
-            }
-          }
-        },
-      "objects" : {
-        "1" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 359,
-              "y" : 450
-              }
-            },
-          "label" : "D",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : -16,
-              "labelOffsetY" : 4
-              }
-            }
-          },
-        "2" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 581,
-              "y" : 448
-              }
-            },
-          "label" : "E",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : 7,
-              "labelOffsetY" : -18
-              }
-            }
-          },
         "3" : {
           "kind" : "Point",
           "genus" : "Point",
           "constraint" : "Free",
           "geom" : {
             "loc" : {
-              "x" : 177,
-              "y" : 630
+              "x" : 1211,
+              "y" : 613
               }
             },
-          "label" : "A",
+          "label" : "L",
           "style" : {
             "label" : {
               "showLabel" : true,
-              "labelOffsetX" : -17,
-              "labelOffsetY" : 3
+              "labelOffsetX" : -23,
+              "labelOffsetY" : -4
               }
             }
           },
@@ -1625,58 +143,65 @@
           "constraint" : "Free",
           "geom" : {
             "loc" : {
-              "x" : 210,
-              "y" : 306
+              "x" : 1268,
+              "y" : 613
               }
             },
-          "label" : "C",
+          "label" : "M",
           "style" : {
             "label" : {
               "showLabel" : true,
-              "labelOffsetX" : -18,
-              "labelOffsetY" : -29
+              "labelOffsetX" : 8,
+              "labelOffsetY" : -13,
+              "color" : "black"
               }
             }
           },
         "5" : {
-          "kind" : "Polygon",
-          "genus" : "Quadrilateral",
+          "kind" : "Circle",
+          "genus" : "Circle",
           "parents" : {
-            "0" : "1",
-            "1" : "2",
-            "2" : "3",
-            "3" : "4"
+            "p0" : "3",
+            "p1" : "4"
             },
-          "constraint" : "PolygonFromPoints",
-          "label" : "P[1]",
+          "constraint" : "CircleFromTwoPoints",
           "style" : {
-            "layerOrder" : 0
+            "line-style" : "dashed"
             }
           },
         "6" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
+          "kind" : "Point",
+          "genus" : "PointOnPath",
           "parents" : {
-            "p0" : "4",
-            "p1" : "1"
+            "path" : "5"
             },
-          "constraint" : "Segment",
-          "label" : "j"
+          "value" : 2.4993373307138182e-05,
+          "constraint" : "PointOnPath",
+          "label" : "N",
+          "style" : {
+            "label" : {
+              "showLabel" : true,
+              "labelOffsetX" : 5,
+              "labelOffsetY" : -23,
+              "color" : "black"
+              }
+            }
           },
         "7" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
+          "kind" : "Arc",
+          "genus" : "SimpleArc",
           "parents" : {
-            "p0" : "1",
-            "p1" : "2"
+            "circle" : "5",
+            "p0" : "4",
+            "p1" : "6"
             },
-          "constraint" : "Segment"
+          "constraint" : "ArcOnCircle"
           },
         "8" : {
           "kind" : "Straight",
           "genus" : "Segment",
           "parents" : {
-            "p0" : "2",
+            "p0" : "4",
             "p1" : "3"
             },
           "constraint" : "Segment"
@@ -1686,23 +211,22 @@
           "genus" : "Segment",
           "parents" : {
             "p0" : "3",
-            "p1" : "4"
+            "p1" : "6"
             },
-          "constraint" : "Segment",
-          "label" : "k"
+          "constraint" : "Segment"
           },
         "10" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 730,
-              "y" : 195
-              }
+          "kind" : "AngleMarker",
+          "genus" : "AngleMarker",
+          "parents" : {
+            "p0" : "4",
+            "p1" : "3",
+            "p2" : "6"
             },
+          "constraint" : "AngleMarker_CCW",
           "style" : {
-            "hidden" : true
+            "opacity" : 0.25,
+            "show-angle-direction" : true
             }
           },
         "11" : {
@@ -1711,75 +235,96 @@
           "constraint" : "Free",
           "geom" : {
             "loc" : {
-              "x" : 177,
-              "y" : 630
+              "x" : 765,
+              "y" : 633
               }
             },
-          "latentVisibility" : true,
-          "label" : "A'",
+          "label" : "R",
           "style" : {
-            "hidden" : true,
             "label" : {
               "showLabel" : true,
-              "labelOffsetX" : -17,
-              "labelOffsetY" : 3
+              "labelOffsetX" : -22,
+              "labelOffsetY" : 0
               }
             }
           },
         "12" : {
-          "kind" : "Button",
-          "genus" : "Action",
-          "parents" : {
-            "0" : "10",
-            "1" : "11"
-            },
-          "geom" : {
-            "loc" : {
-              "x" : 33,
-              "y" : 23
-              }
-            },
-          "label" : "Translate A to A'",
-          "constraint" : "ActionButtonMove",
-          "messages" : [
-            "Translate A to A'"
-            ],
-          "rate" : 1
-          },
-        "13" : {
-          "kind" : "Button",
-          "genus" : "Action",
-          "parents" : {
-            "0" : "3",
-            "1" : "11"
-            },
-          "geom" : {
-            "loc" : {
-              "x" : 37,
-              "y" : 81
-              }
-            },
-          "label" : "Reset",
-          "constraint" : "ActionButtonMove",
-          "messages" : [
-            "Reset"
-            ],
-          "rate" : 3
-          },
-        "14" : {
           "kind" : "Point",
           "genus" : "Point",
-          "parents" : {
-            "source" : "1",
-            "p0" : "3",
-            "p1" : "11"
+          "constraint" : "Free",
+          "geom" : {
+            "loc" : {
+              "x" : 926,
+              "y" : 633
+              }
             },
-          "constraint" : "TranslateVector",
-          "shouldAutogenerateLabel" : true,
-          "latentVisibility" : true,
-          "label" : "D'",
+          "label" : "S",
+          "style" : {
+            "label" : {
+              "showLabel" : true,
+              "labelOffsetX" : 3,
+              "labelOffsetY" : 0
+              }
+            }
+          },
+        "13" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "p0" : "11",
+            "p1" : "12"
+            },
+          "constraint" : "Segment"
+          },
+        "14" : {
+          "kind" : "Circle",
+          "genus" : "Circle",
+          "parents" : {
+            "p0" : "11",
+            "p1" : "12"
+            },
+          "constraint" : "CircleFromTwoPoints",
           "style" : {
             "hidden" : true,
+            "width" : 1
+            }
+          },
+        "15" : {
+          "kind" : "Straight",
+          "genus" : "Perpendicular",
+          "parents" : {
+            "p0" : "11",
+            "line" : "13"
+            },
+          "constraint" : "Perpendicular",
+          "style" : {
+            "hidden" : true,
+            "width" : 1
+            }
+          },
+        "16" : {
+          "kind" : "Straight",
+          "genus" : "Perpendicular",
+          "parents" : {
+            "p0" : "12",
+            "line" : "13"
+            },
+          "constraint" : "Perpendicular",
+          "style" : {
+            "hidden" : true,
+            "width" : 1
+            }
+          },
+        "17" : {
+          "kind" : "Point",
+          "genus" : "Intersection",
+          "parents" : {
+            "obj" : "15",
+            "circle" : "14"
+            },
+          "constraint" : "Intersection1",
+          "label" : "P",
+          "style" : {
             "label" : {
               "showLabel" : true,
               "labelOffsetX" : 8,
@@ -1787,905 +332,299 @@
               }
             }
           },
-        "15" : {
-          "kind" : "Point",
-          "genus" : "Point",
+        "18" : {
+          "kind" : "Straight",
+          "genus" : "Perpendicular",
           "parents" : {
-            "source" : "4",
-            "p0" : "3",
-            "p1" : "11"
+            "p0" : "17",
+            "line" : "15"
             },
-          "constraint" : "TranslateVector",
-          "shouldAutogenerateLabel" : true,
-          "latentVisibility" : true,
-          "label" : "C'",
+          "constraint" : "Perpendicular",
           "style" : {
             "hidden" : true,
+            "width" : 1
+            }
+          },
+        "19" : {
+          "kind" : "Point",
+          "genus" : "Intersection",
+          "parents" : {
+            "line0" : "16",
+            "line1" : "18"
+            },
+          "constraint" : "Intersection",
+          "label" : "Q",
+          "style" : {
             "label" : {
               "showLabel" : true,
-              "labelOffsetX" : -11,
-              "labelOffsetY" : -31
+              "labelOffsetX" : 8,
+              "labelOffsetY" : 5
               }
             }
           },
-        "16" : {
+        "20" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "p0" : "11",
+            "p1" : "17"
+            },
+          "constraint" : "Segment"
+          },
+        "21" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "p0" : "17",
+            "p1" : "19"
+            },
+          "constraint" : "Segment"
+          },
+        "22" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "p0" : "19",
+            "p1" : "12"
+            },
+          "constraint" : "Segment"
+          },
+        "23" : {
           "kind" : "Polygon",
           "genus" : "Quadrilateral",
           "parents" : {
-            "source" : "5",
-            "p0" : "3",
-            "p1" : "11"
+            "0" : "11",
+            "1" : "12",
+            "2" : "19",
+            "3" : "17"
             },
-          "constraint" : "TranslateVector",
-          "shouldAutogenerateLabel" : true,
-          "latentVisibility" : true,
-          "label" : "P[1]'",
+          "constraint" : "PolygonFromPoints",
           "style" : {
-            "hidden" : true,
-            "layerOrder" : 1
+            "color" : "yellow",
+            "layerOrder" : 0,
+            "framePerimeter" : true
             }
           },
-        "17" : {
+        "24" : {
           "kind" : "Straight",
           "genus" : "Segment",
           "parents" : {
-            "source" : "6",
-            "p0" : "3",
-            "p1" : "11"
+            "p0" : "17",
+            "p1" : "12"
             },
-          "constraint" : "TranslateVector",
-          "shouldAutogenerateLabel" : true,
-          "latentVisibility" : true,
-          "label" : "j'",
+          "constraint" : "Segment",
           "style" : {
             "hidden" : true
             }
           },
-        "18" : {
+        "25" : {
           "kind" : "Straight",
           "genus" : "Segment",
           "parents" : {
-            "source" : "7",
-            "p0" : "3",
-            "p1" : "11"
+            "p0" : "11",
+            "p1" : "19"
             },
-          "constraint" : "TranslateVector",
-          "shouldAutogenerateLabel" : true,
-          "latentVisibility" : true,
+          "constraint" : "Segment",
           "style" : {
             "hidden" : true
             }
           },
-        "19" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
+        "26" : {
+          "kind" : "Point",
+          "genus" : "Intersection",
           "parents" : {
-            "source" : "8",
-            "p0" : "3",
-            "p1" : "11"
+            "line0" : "25",
+            "line1" : "24"
             },
-          "constraint" : "TranslateVector",
-          "shouldAutogenerateLabel" : true,
-          "latentVisibility" : true,
-          "style" : {
-            "hidden" : true
-            }
+          "constraint" : "Intersection",
+          "label" : "T"
           },
-        "20" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "source" : "9",
-            "p0" : "3",
-            "p1" : "11"
-            },
-          "constraint" : "TranslateVector",
-          "shouldAutogenerateLabel" : true,
-          "latentVisibility" : true,
-          "label" : "k'",
-          "style" : {
-            "hidden" : true
-            }
-          },
-        "21" : {
+        "27" : {
           "kind" : "Point",
           "genus" : "Point",
           "parents" : {
-            "source" : "2",
-            "p0" : "3",
-            "p1" : "11"
+            "source" : "11",
+            "center" : "26",
+            "angle" : "10"
             },
-          "constraint" : "TranslateVector",
-          "latentVisibility" : true,
-          "label" : "E'",
+          "constraint" : "RotateAngleMarker",
+          "shouldAutogenerateLabel" : true
+          },
+        "28" : {
+          "kind" : "Point",
+          "genus" : "Point",
+          "parents" : {
+            "source" : "12",
+            "center" : "26",
+            "angle" : "10"
+            },
+          "constraint" : "RotateAngleMarker",
+          "shouldAutogenerateLabel" : true
+          },
+        "29" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "source" : "13",
+            "center" : "26",
+            "angle" : "10"
+            },
+          "constraint" : "RotateAngleMarker",
+          "shouldAutogenerateLabel" : true
+          },
+        "30" : {
+          "kind" : "Point",
+          "genus" : "Point",
+          "parents" : {
+            "source" : "17",
+            "center" : "26",
+            "angle" : "10"
+            },
+          "constraint" : "RotateAngleMarker",
+          "shouldAutogenerateLabel" : true
+          },
+        "31" : {
+          "kind" : "Point",
+          "genus" : "Point",
+          "parents" : {
+            "source" : "19",
+            "center" : "26",
+            "angle" : "10"
+            },
+          "constraint" : "RotateAngleMarker",
+          "shouldAutogenerateLabel" : true
+          },
+        "32" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "source" : "20",
+            "center" : "26",
+            "angle" : "10"
+            },
+          "constraint" : "RotateAngleMarker",
+          "shouldAutogenerateLabel" : true
+          },
+        "33" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "source" : "21",
+            "center" : "26",
+            "angle" : "10"
+            },
+          "constraint" : "RotateAngleMarker",
+          "shouldAutogenerateLabel" : true
+          },
+        "34" : {
+          "kind" : "Straight",
+          "genus" : "Segment",
+          "parents" : {
+            "source" : "22",
+            "center" : "26",
+            "angle" : "10"
+            },
+          "constraint" : "RotateAngleMarker",
+          "shouldAutogenerateLabel" : true
+          },
+        "35" : {
+          "kind" : "Polygon",
+          "genus" : "Quadrilateral",
+          "parents" : {
+            "source" : "23",
+            "center" : "26",
+            "angle" : "10"
+            },
+          "constraint" : "RotateAngleMarker",
+          "shouldAutogenerateLabel" : true,
           "style" : {
-            "hidden" : true,
+            "color" : "yellow",
+            "layerOrder" : 1,
+            "framePerimeter" : true
+            }
+          },
+        "36" : {
+          "kind" : "Point",
+          "genus" : "Point",
+          "parents" : {
+            "source" : "26",
+            "center" : "26",
+            "angle" : "10"
+            },
+          "constraint" : "RotateAngleMarker",
+          "label" : "O",
+          "style" : {
             "label" : {
               "showLabel" : true,
               "labelOffsetX" : 8,
               "labelOffsetY" : 5
               }
-            }
-          },
-        "22" : {
-          "kind" : "Measure",
-          "genus" : "DistanceMeasure",
-          "parents" : {
-            "p0" : "3",
-            "obj0" : "11"
-            },
-          "constraint" : "MeasurementDistance",
-          "geom" : {
-            "loc" : {
-              "x" : 53,
-              "y" : 146
-              }
-            },
-          "style" : {
-            "precision" : 2,
-            "nameOrigin" : "namedFromTemplate"
-            }
-          },
-        "23" : {
-          "kind" : "Measure",
-          "genus" : "DistanceMeasure",
-          "parents" : {
-            "p0" : "4",
-            "obj0" : "15"
-            },
-          "constraint" : "MeasurementDistance",
-          "geom" : {
-            "loc" : {
-              "x" : 52,
-              "y" : 177
-              }
-            },
-          "style" : {
-            "precision" : 2,
-            "nameOrigin" : "namedFromTemplate"
-            }
-          },
-        "24" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "p0" : "4",
-            "p1" : "15"
-            },
-          "constraint" : "Segment",
-          "style" : {
-            "line-style" : "dashed"
-            }
-          },
-        "25" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "p0" : "3",
-            "p1" : "11"
-            },
-          "constraint" : "Segment",
-          "style" : {
-            "line-style" : "dashed"
-            }
-          },
-        "26" : {
-          "kind" : "Button",
-          "genus" : "Action",
-          "parents" : {
-            "0" : "20",
-            "1" : "16",
-            "2" : "11",
-            "3" : "19",
-            "4" : "21",
-            "5" : "18",
-            "6" : "14",
-            "7" : "17",
-            "8" : "15"
-            },
-          "geom" : {
-            "loc" : {
-              "x" : 290,
-              "y" : 25
-              }
-            },
-          "label" : "A'B'C'D'",
-          "constraint" : "ActionButtonToggleHideShow",
-          "messages" : [
-            "A'B'C'D'",
-            "A'B'C'D'"
-            ],
-          "fade" : true
-          },
-        "27" : {
-          "kind" : "Text",
-          "genus" : "Caption",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 875,
-              "y" : -25
-              }
-            },
-          "textMFS" : "<VL<T'1. Click on the button to Translate A to A\\''><0><T'2. Click on the button to show A\\'B\\'C\\'D\\', the image of ABCD under the'><T'Translation.'><0><T'3. Observe the distances AA\\' and CC\\''><0><T'4. What do you notice?'><0><T'5. Click and drag any of the points ABCD to change the shape.'><0><T'6. Reset the the translation by clicking the Reset button.'><0><T'7. Repeat Steps 1 to 6.  What do you notice each time?'><0><T'8. Under a Translation what changes and what stays the same?'><F1Dxx20Cx20x2000x>>"
-          }
-        }
-      },
-    {
-      "metadata" : {
-        "title" : "Enlargements",
-        "id" : "4",
-        "sketchRect" : {
-          "top" : 11,
-          "left" : -32,
-          "bottom" : 1116,
-          "right" : 1841
-          }
-        },
-      "preferences" : {
-        "units" : {
-          "length" : "cm",
-          "angle" : "deg"
-          },
-        "precision" : {
-          "length" : 2,
-          "angle" : 0,
-          "scalar" : 2
-          },
-        "colorableComponents" : {
-          "ActionButton" : {
-            "color" : "rgb(255,128,0)"
-            }
-          },
-        "text" : {
-          "mathItalicization" : true,
-          "textTypes" : {
-            "Label" : {
-              "font-family" : "\"Times New Roman\", serif"
-              },
-            "Caption" : {
-              "font-family" : "\"Arial\", sans-serif",
-              "font-size" : 36,
-              "font-weight" : "bold",
-              "font-style" : "italic"
-              },
-            "Measurement" : {
-              "font-family" : "\"Times New Roman\", serif",
-              "font-weight" : "bold"
-              },
-            "Action" : {
-              "label" : {
-                "font-family" : "\"Arial\", sans-serif",
-                "font-size" : 24
-                }
-              },
-            "Table" : {
-              "font-family" : "\"Arial\", sans-serif",
-              "font-size" : 24
-              },
-            "AxisTicksAndOptionalLabel" : {
-              "font-family" : "\"Arial\", sans-serif"
-              }
-            }
-          }
-        },
-      "objects" : {
-        "1" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 540,
-              "y" : 709
-              }
-            },
-          "style" : {
-            "hidden" : true
-            }
-          },
-        "2" : {
-          "kind" : "Expression",
-          "genus" : "ScalarParameter",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 187,
-              "y" : 502
-              }
-            },
-          "expressionType" : "UniMeasure_ExprType",
-          "expression" : "1",
-          "style" : {
-            "hidden" : true,
-            "precision" : 2,
-            "nameOrigin" : "namedFromLabel",
-            "contenteditable" : true
-            }
-          },
-        "3" : {
-          "kind" : "Text",
-          "genus" : "Caption",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 38,
-              "y" : 62
-              }
-            },
-          "textMFS" : "<VL<T'1. Click on the button to increase the scale factor of the Enlargement by 1'><T'each time.'><0><T'2. What changes each time you increase or decrease the Scale Factor?'><0><T'3. What changes and what stays the same under an Enlargement?'><F1Bxx276x20x80x>>",
-          "style" : {
-            "font-size" : 18,
-            "font-style" : "normal"
-            }
-          },
-        "4" : {
-          "kind" : "Text",
-          "genus" : "Caption",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 604,
-              "y" : 506
-              }
-            },
-          "textMFS" : "<VL<!6A>>",
-          "style" : {
-            "font-size" : 18,
-            "font-style" : "normal"
-            }
-          },
-        "5" : {
-          "kind" : "Text",
-          "genus" : "Caption",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 781,
-              "y" : 628
-              }
-            },
-          "textMFS" : "<VL<!71>>",
-          "style" : {
-            "font-family" : 2,
-            "font-size" : 18,
-            "font-style" : "normal"
-            }
-          },
-        "6" : {
-          "kind" : "Expression",
-          "genus" : "ScalarParameter",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 315,
-              "y" : 248
-              }
-            },
-          "expressionType" : "UniMeasure_ExprType",
-          "expression" : "1",
-          "label" : "K",
-          "style" : {
-            "precision" : 2,
-            "nameOrigin" : "namedFromLabel",
-            "contenteditable" : true
-            }
-          },
-        "7" : {
-          "kind" : "Expression",
-          "genus" : "ScalarMeasure",
-          "parents" : {
-            "0" : "6"
-            },
-          "constraint" : "Calculation",
-          "geom" : {
-            "loc" : {
-              "x" : 397,
-              "y" : 405
-              }
-            },
-          "expressionType" : "UniMeasure_ExprType",
-          "expression" : "@0+1",
-          "label" : "K+1",
-          "style" : {
-            "hidden" : true,
-            "precision" : 2,
-            "nameOrigin" : "namedFromLabel"
-            }
-          },
-        "8" : {
-          "kind" : "Button",
-          "genus" : "Action",
-          "parents" : {
-            "0" : "7",
-            "1" : "6"
-            },
-          "geom" : {
-            "loc" : {
-              "x" : 18,
-              "y" : 246
-              }
-            },
-          "label" : "Increase Scale Factor K",
-          "constraint" : "ActionButtonMove",
-          "messages" : [
-            "Increase Scale Factor K"
-            ],
-          "rate" : 0
-          },
-        "9" : {
-          "kind" : "Point",
-          "genus" : "UnitPoint",
-          "parents" : {
-            "origin" : "1"
-            },
-          "value" : 57.346456692913421,
-          "constraint" : "HorizontalUnitPoint",
-          "style" : {
-            "hidden" : true
-            }
-          },
-        "10" : {
-          "kind" : "Axis",
-          "genus" : "Axis",
-          "parents" : {
-            "origin" : "1",
-            "unitPoint" : "9"
-            },
-          "constraint" : "AxisInternalDist",
-          "orientation" : "horizontal",
-          "label" : "x",
-          "style" : {
-            "hidden" : true,
-            "label" : {
-              "showLabel" : false
-              },
-            "width" : 1
-            }
-          },
-        "11" : {
-          "kind" : "Point",
-          "genus" : "UnitPoint",
-          "parents" : {
-            "unitPoint" : "9"
-            },
-          "constraint" : "UnitPointInternalSquare",
-          "style" : {
-            "hidden" : true
-            }
-          },
-        "12" : {
-          "kind" : "Axis",
-          "genus" : "Axis",
-          "parents" : {
-            "origin" : "1",
-            "unitPoint" : "11"
-            },
-          "constraint" : "AxisInternalDist",
-          "orientation" : "vertical",
-          "label" : "y",
-          "style" : {
-            "hidden" : true,
-            "label" : {
-              "showLabel" : false
-              },
-            "width" : 1
-            }
-          },
-        "13" : {
-          "kind" : "CoordSys",
-          "genus" : "CoordSys",
-          "parents" : {
-            "axisX" : "10",
-            "axisY" : "12"
-            },
-          "constraint" : "CoordSys",
-          "shape" : "square",
-          "style" : {
-            "hidden" : true,
-            "grid" : "gridlines"
-            }
-          },
-        "14" : {
-          "kind" : "Point",
-          "genus" : "PlottedPoint",
-          "parents" : {
-            "coordSys" : "13"
-            },
-          "coordX" : 1,
-          "coordY" : 1,
-          "constraint" : "PlotFixedXFixedY",
-          "label" : "A",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : -30,
-              "labelOffsetY" : -2,
-              "font-size" : 36
-              }
-            }
-          },
-        "15" : {
-          "kind" : "Point",
-          "genus" : "PlottedPoint",
-          "parents" : {
-            "coordSys" : "13"
-            },
-          "coordX" : 1,
-          "coordY" : 4,
-          "constraint" : "PlotFixedXFixedY"
-          },
-        "16" : {
-          "kind" : "Point",
-          "genus" : "PlottedPoint",
-          "parents" : {
-            "coordSys" : "13"
-            },
-          "coordX" : 5,
-          "coordY" : 1,
-          "constraint" : "PlotFixedXFixedY",
-          "label" : "B"
-          },
-        "17" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "p0" : "16",
-            "p1" : "14"
-            },
-          "constraint" : "Segment"
-          },
-        "18" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "p0" : "14",
-            "p1" : "15"
-            },
-          "constraint" : "Segment"
-          },
-        "19" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "p0" : "15",
-            "p1" : "16"
-            },
-          "constraint" : "Segment"
-          },
-        "20" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "source" : "18",
-            "center" : "14",
-            "measure" : "6"
-            },
-          "constraint" : "DilateMeasureFactor",
-          "shouldAutogenerateLabel" : true
-          },
-        "21" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "parents" : {
-            "source" : "15",
-            "center" : "14",
-            "measure" : "6"
-            },
-          "constraint" : "DilateMeasureFactor",
-          "label" : "C",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : -29,
-              "labelOffsetY" : -40,
-              "font-size" : 36
-              }
-            }
-          },
-        "22" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "source" : "19",
-            "center" : "14",
-            "measure" : "6"
-            },
-          "constraint" : "DilateMeasureFactor",
-          "shouldAutogenerateLabel" : true
-          },
-        "23" : {
-          "kind" : "Straight",
-          "genus" : "Segment",
-          "parents" : {
-            "source" : "17",
-            "center" : "14",
-            "measure" : "6"
-            },
-          "constraint" : "DilateMeasureFactor",
-          "shouldAutogenerateLabel" : true
-          },
-        "24" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "parents" : {
-            "source" : "16",
-            "center" : "14",
-            "measure" : "6"
-            },
-          "constraint" : "DilateMeasureFactor",
-          "label" : "B",
-          "style" : {
-            "label" : {
-              "showLabel" : true,
-              "labelOffsetX" : 8,
-              "labelOffsetY" : 5,
-              "font-size" : 36
-              }
-            }
-          },
-        "25" : {
-          "kind" : "Measure",
-          "genus" : "ScalarMeasure",
-          "parents" : {
-            "p0" : "24",
-            "p1" : "21",
-            "coordSys" : "13"
-            },
-          "constraint" : "MeasurementCoordinateDistance",
-          "geom" : {
-            "loc" : {
-              "x" : 841,
-              "y" : 491
-              }
-            },
-          "label" : "BC",
-          "style" : {
-            "precision" : 2,
-            "nameOrigin" : "namedFromLabel"
-            }
-          },
-        "26" : {
-          "kind" : "Expression",
-          "genus" : "ScalarMeasure",
-          "parents" : {
-            "0" : "6"
-            },
-          "constraint" : "Calculation",
-          "geom" : {
-            "loc" : {
-              "x" : 346,
-              "y" : 372
-              }
-            },
-          "expressionType" : "UniMeasure_ExprType",
-          "expression" : "@0-1",
-          "style" : {
-            "hidden" : true,
-            "precision" : 2,
-            "nameOrigin" : "namedFromTemplate"
-            }
-          },
-        "27" : {
-          "kind" : "Measure",
-          "genus" : "ScalarMeasure",
-          "parents" : {
-            "p0" : "14",
-            "p1" : "21",
-            "coordSys" : "13"
-            },
-          "constraint" : "MeasurementCoordinateDistance",
-          "geom" : {
-            "loc" : {
-              "x" : 467,
-              "y" : 545
-              }
-            },
-          "label" : "AC",
-          "style" : {
-            "precision" : 2,
-            "nameOrigin" : "namedFromLabel"
-            }
-          },
-        "28" : {
-          "kind" : "Measure",
-          "genus" : "ScalarMeasure",
-          "parents" : {
-            "p0" : "14",
-            "p1" : "24",
-            "coordSys" : "13"
-            },
-          "constraint" : "MeasurementCoordinateDistance",
-          "geom" : {
-            "loc" : {
-              "x" : 743,
-              "y" : 707
-              }
-            },
-          "label" : "AB",
-          "style" : {
-            "precision" : 2,
-            "nameOrigin" : "namedFromLabel"
-            }
-          },
-        "29" : {
-          "kind" : "Button",
-          "genus" : "Action",
-          "parents" : {
-            "0" : "2",
-            "1" : "6"
-            },
-          "geom" : {
-            "loc" : {
-              "x" : 19,
-              "y" : 358
-              }
-            },
-          "label" : "Reset K to 1",
-          "constraint" : "ActionButtonMove",
-          "messages" : [
-            "Reset K to 1"
-            ],
-          "rate" : 0
-          },
-        "30" : {
-          "kind" : "Button",
-          "genus" : "Action",
-          "parents" : {
-            "0" : "26",
-            "1" : "6"
-            },
-          "geom" : {
-            "loc" : {
-              "x" : 17,
-              "y" : 306
-              }
-            },
-          "label" : "Decrease Scale Factor K",
-          "constraint" : "ActionButtonMove",
-          "messages" : [
-            "Decrease Scale Factor K"
-            ],
-          "rate" : 0
-          },
-        "31" : {
-          "kind" : "AngleMarker",
-          "genus" : "AngleMarker",
-          "parents" : {
-            "p0" : "21",
-            "p1" : "24",
-            "p2" : "14"
-            },
-          "constraint" : "AngleMarker_Simple",
-          "style" : {
-            "show-angle-direction" : true
-            }
-          },
-        "32" : {
-          "kind" : "Measure",
-          "genus" : "AngleMeasure",
-          "parents" : {
-            "marker" : "31"
-            },
-          "constraint" : "MeasurementAngleMarker",
-          "geom" : {
-            "loc" : {
-              "x" : 86,
-              "y" : 517
-              }
-            },
-          "style" : {
-            "hidden" : true,
-            "precision" : 0,
-            "nameOrigin" : "noVisibleName"
-            }
-          },
-        "33" : {
-          "kind" : "Text",
-          "genus" : "CompositeText",
-          "parents" : {
-            "0" : "32"
-            },
-          "constraint" : "CompositeText",
-          "geom" : {
-            "loc" : {
-              "x" : 40,
-              "y" : 424
-              }
-            },
-          "textMFS" : "<VL<H<!71><T' = '><?1xC0001<H<H<T'37'>><!B0>>>>>",
-          "style" : {
-            "font-family" : 2,
-            "font-size" : 18,
-            "font-style" : "normal"
-            }
-          },
-        "34" : {
-          "kind" : "Point",
-          "genus" : "Point",
-          "parents" : {
-            "source" : "14",
-            "center" : "14",
-            "measure" : "6"
-            },
-          "constraint" : "DilateMeasureFactor",
-          "shouldAutogenerateLabel" : true
-          },
-        "35" : {
-          "kind" : "AngleMarker",
-          "genus" : "AngleMarker",
-          "parents" : {
-            "p0" : "21",
-            "p1" : "34",
-            "p2" : "24"
-            },
-          "constraint" : "AngleMarker_Simple",
-          "style" : {
-            "show-angle-direction" : true
-            }
-          },
-        "36" : {
-          "kind" : "AngleMarker",
-          "genus" : "AngleMarker",
-          "parents" : {
-            "p0" : "34",
-            "p1" : "21",
-            "p2" : "24"
-            },
-          "constraint" : "AngleMarker_Simple",
-          "style" : {
-            "show-angle-direction" : true
             }
           },
         "37" : {
           "kind" : "Measure",
           "genus" : "AngleMeasure",
           "parents" : {
-            "marker" : "36"
+            "marker" : "10"
             },
           "constraint" : "MeasurementAngleMarker",
           "geom" : {
             "loc" : {
-              "x" : 244,
-              "y" : 525
+              "x" : 1267,
+              "y" : 408
               }
             },
+          "latentVisibility" : true,
           "style" : {
-            "hidden" : true,
             "precision" : 0,
-            "nameOrigin" : "noVisibleName"
+            "nameOrigin" : "namedFromTemplate"
             }
           },
         "38" : {
-          "kind" : "Text",
-          "genus" : "CompositeText",
+          "kind" : "Button",
+          "genus" : "Action",
+          "parents" : {
+            "0" : "6"
+            },
+          "geom" : {
+            "loc" : {
+              "x" : 1055,
+              "y" : 485
+              }
+            },
+          "label" : "Rotate The Square About O",
+          "constraint" : "ActionButtonAnimate",
+          "messages" : [
+            "Rotate The Square About O"
+            ],
+          "animationStates" : [
+            {
+              "rate" : 1,
+              "timeInterval" : 0,
+              "repeat" : true,
+              "motionType" : "forward"
+              }
+            ]
+          },
+        "39" : {
+          "kind" : "Button",
+          "genus" : "Action",
           "parents" : {
             "0" : "37"
             },
-          "constraint" : "CompositeText",
           "geom" : {
             "loc" : {
-              "x" : 41,
-              "y" : 466
+              "x" : 1057,
+              "y" : 402
               }
             },
-          "textMFS" : "<VL<H<!6A><T' ='><?1xC0001<H<H<T'53'>><!B0>>>>>",
-          "style" : {
-            "font-size" : 18,
-            "font-style" : "normal"
-            }
-          },
-        "39" : {
-          "kind" : "Text",
-          "genus" : "Caption",
-          "constraint" : "Free",
-          "geom" : {
-            "loc" : {
-              "x" : 789,
-              "y" : 20
-              }
-            },
-          "textMFS" : "<S#24<VL<T'Enlargements'>>>"
+          "label" : "Angle of Rotation",
+          "constraint" : "ActionButtonToggleHideShow",
+          "messages" : [
+            "Angle of Rotation",
+            "Angle of Rotation"
+            ],
+          "fade" : true
           }
         }
       }
@@ -2701,7 +640,7 @@
             <footer>
                 <div class="legal">
                     <div class="version">
-                    Exported Wed Sep 17 14:11:16 2025 by GSP 5.10 (3058).</div>
+                    Exported Sat Sep 20 16:06:22 2025 by GSP 5.10 (3058).</div>
                     <hr>
                     <div class="copyright">Copyright &copy; 2024 KCP Technologies, a McGraw Hill Company. All rights reserved. This is a <a href="http://gsptest.scratchconsortium.com">field-test version</a> of Web Sketchpad, an internet component of <a href="http://www.dynamicgeometry.com">The Geometer’s Sketchpad<sup>&reg;</sup></a>. Commercial uses of Web Sketchpad require a license from McGraw Hill. Web Sketchpad, The Geometer’s Sketchpad, and Dynamic Geometry are trademarks and registered trademarks of McGraw Hill and KCP Technologies.</div>
                 </div>

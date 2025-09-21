@@ -119,7 +119,14 @@ activityTitle: "Squares on a Right Triangle (Web Sketchpad)",
   includes: ["Mastered 1080p MP4", "Teacher notes & scene prompts (coming soon)", "Captions (EN)"],
   tags: ["Algebra", "Groups", "France"],
   embedSrc: "https://player.vimeo.com/video/1118453852?h=ae721f8202&badge=0&autopause=0&player_id=0&app_id=58479",
+  activity: {
+    options: [
+      { key: "clock6", label: "Clock Arithmetic (mod 6)", path: "/activities/galois/clock_mod6.html" }
+    ],
+    defaultKey: "clock6"
+  }
 }
+
 
 
 

@@ -75,7 +75,15 @@ activityTitle: "Squares on a Right Triangle (Web Sketchpad)",
     includes: ["Mastered 1080p MP4", "Teacher notes & scene prompts", "Captions (EN)"],
     tags: ["Primes", "Resilience", "Women in Maths"],
     embedSrc: "https://player.vimeo.com/video/1118489526?h=530df61cb5",
+    activity: {
+    // single activity
+    options: [
+      { key: "germain", label: "Germain Primes Builder", path: "/activities/sophie/germain.html" },
+    ],
+    defaultKey: "germain",
   },
+},
+
 {
   id: "emmy",
   title: "Emmy Noether — The Heartbeat of the Universe",

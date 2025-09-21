@@ -370,8 +370,8 @@ function Home() {
           Pixar-style animated films that make <span className="text-cyan-300">mathematics</span> unforgettable
         </h1>
         <p className="text-slate-300 text-lg">
-          Showcase and sell your growing collection of short films about the great mathematicians.
-          Explore your interactive <span className="text-white font-semibold">History of Maths Museum</span> in Virtway and Frame VR.
+          Enjoy our growing collection of short films about the great mathematicians throughout history.
+          Explore our interactive <span className="text-white font-semibold">History of Maths Museum and History of Maths Escape Room</span> in Virtway and Frame VR.
         </p>
         <div className="flex flex-wrap gap-3">
           <a href="#films" className="px-5 py-3 rounded-2xl bg-cyan-400/90 hover:bg-cyan-300 text-slate-900 font-semibold">

@@ -2,11 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Clock Arithmetic (mod 6) — Galois</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Clock Arithmetic (mod 6) — Fill the Cayley Table</title>
 <style>
-  /* Card styling that looks great inside your dark site */
-  :root { --bg: #ffffff; --fg: #0f172a; --muted:#475569; --accent:#0ea5e9; --a:#22c55e; --b:#f59e0b; --sum:#ef4444; }
+  :root { --bg:#ffffff; --fg:#0f172a; --muted:#475569; --accent:#0ea5e9; --a:#22c55e; --b:#f59e0b; --sum:#ef4444; --ok:#16a34a; --bad:#dc2626; }
   html,body{margin:0;padding:0;background:transparent;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial;color:var(--fg)}
   .wrap{max-width:1100px;margin:24px auto;padding:22px;background:var(--bg);border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,.18)}
   h1{margin:0 0 6px;font-size:20px;font-weight:800}
@@ -19,6 +18,7 @@
   .chip small{opacity:.75;font-weight:700;letter-spacing:.02em}
   .chip input{width:3.5rem;text-align:center;border:0;background:#fff;border-radius:7px;padding:6px 8px;font-weight:700}
   .btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;border:0;border-radius:8px;padding:.55rem .9rem;font-weight:700;cursor:pointer}
+  .btn.ghost{background:#e2e8f0;color:#0f172a}
   .hint{color:var(--muted);font-size:12px;margin:6px 0 0}
 
   /* Table */
@@ -30,32 +30,32 @@
   td.hl-row{background:#fef3c7 !important}
   td.hl-col{background:#dcfce7 !important}
   td.hl-cell{background:#fee2e2 !important;font-weight:800}
+  td.ok{background:#ecfdf5 !important}
+  td.bad{background:#fee2e2 !important}
   td.clickable{cursor:pointer}
+  select.answer{appearance:none;background:#ffffff;border:1px solid #cbd5e1;border-radius:8px;padding:4px 8px;font-weight:700;min-width:58px}
+  td.ok select{border-color:#86efac}
+  td.bad select{border-color:#fda4af}
 
   /* Clock */
   .clock-wrap{position:relative;aspect-ratio:1/1;background:#fff;border-radius:12px;box-shadow:inset 0 0 0 2px #e5e7eb, 0 1px 6px rgba(15,23,42,.06)}
   .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
   .dot{width:10px;height:10px;border-radius:999px;display:inline-block}
   .lg{display:flex;align-items:center;gap:6px;font-size:13px}
-
-  /* Marker labels */
-  .label{position:absolute;transform:translate(-50%,-50%);font-weight:700}
-  .label.a{color:var(--a)}
-  .label.b{color:var(--b)}
-  .label.s{color:var(--sum)}
 </style>
 </head>
 <body>
   <main class="wrap">
-    <h1>Clock Arithmetic — Addition mod 6</h1>
-    <p class="sub">Pick two numbers a and b, watch the “wrap-around” on a 6-hour clock, and see the Cayley table highlight their sum.</p>
+    <h1>Clock Arithmetic — Fill the table (mod 6)</h1>
+    <p class="sub">Use the clock to reason about <strong>(a ⊕ b) mod 6</strong>. Complete the Cayley table; your answers are checked instantly.</p>
 
     <div class="panel">
       <div class="controls">
         <span class="chip"><small>a</small> <input id="inA" type="number" min="0" max="5" step="1" value="2" /></span>
         <span class="chip"><small>b</small> <input id="inB" type="number" min="0" max="5" step="1" value="4" /></span>
         <button id="rand" class="btn">Random a,b</button>
-        <span class="hint">Click numbers on the clock or cells in the table to set a or b.</span>
+        <span class="hint">Click numbers on the clock or row/column headers to set <em>a</em> and <em>b</em>.</span>
+        <span id="progress" class="hint" style="margin-left:auto">0 / 36 correct</span>
       </div>
     </div>
 
@@ -66,15 +66,20 @@
         <div class="legend">
           <span class="lg"><i class="dot" style="background:var(--a)"></i> a</span>
           <span class="lg"><i class="dot" style="background:var(--b)"></i> b</span>
-          <span class="lg"><i class="dot" style="background:var(--sum)"></i> a ⊕ b (mod 6)</span>
+          <span class="lg"><i class="dot" style="background:var(--sum)"></i> a ⊕ b</span>
         </div>
       </div>
 
       <!-- TABLE -->
-      <div>
-        <div class="panel">
+      <div class="">
+        <div class="panel" style="display:flex;flex-direction:column;gap:10px">
           <strong>Cayley table: (a ⊕ b) mod 6</strong>
-          <div id="tableArea" style="margin-top:10px; overflow:auto; max-height:520px"></div>
+          <div id="tableArea"></div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap">
+            <button id="checkAll" class="btn">Check all</button>
+            <button id="reveal" class="btn ghost">Reveal remaining</button>
+            <button id="reset" class="btn ghost">Reset table</button>
+          </div>
         </div>
       </div>
     </section>
@@ -88,11 +93,14 @@
   const inB = $('#inB');
   const tableArea = $('#tableArea');
   const clockHost = $('#clock');
+  const progress = $('#progress');
+  const btnCheck = $('#checkAll');
+  const btnReveal = $('#reveal');
+  const btnReset = $('#reset');
 
-  // --- helpers ---
   const mod = (x,n) => ((x % n) + n) % n;
-  const clamp01 = v => Math.max(0, Math.min(1, v));
 
+  // Build clock (SVG) — same as before
   function makeClock() {
     const size = Math.min(clockHost.clientWidth, 560);
     const pad = 20;
@@ -135,14 +143,14 @@
       label.textContent = k;
       label.style.cursor='pointer';
       label.addEventListener('click', (e)=>{
-        // click once sets 'a', click with Shift sets 'b'
+        // Click sets a; Shift+Click sets b
         if (e.shiftKey) inB.value = k; else inA.value = k;
         render();
       });
       svg.appendChild(label);
     }
 
-    // dynamic hands/points
+    // dynamic markers
     const g = document.createElementNS(svg.namespaceURI,'g'); svg.appendChild(g);
 
     function marker(angle, color, len, label) {
@@ -161,7 +169,6 @@
       dot.setAttribute('stroke', '#0f172a'); dot.setAttribute('stroke-width', '1.5');
       g.appendChild(dot);
 
-      // label bubble
       const tx = cx + Math.cos(angle)*(len+20);
       const ty = cy + Math.sin(angle)*(len+20);
       const t = document.createElementNS(svg.namespaceURI,'text');
@@ -175,14 +182,14 @@
     }
 
     function update(a, b) {
-      // clear dynamic group
       g.innerHTML = '';
       const sa = -Math.PI/2 + mod(a,N)*(2*Math.PI/N);
       const sb = -Math.PI/2 + mod(b,N)*(2*Math.PI/N);
       const ssum = -Math.PI/2 + mod(a+b,N)*(2*Math.PI/N);
-      marker(sa, getComputedStyle(document.documentElement).getPropertyValue('--a').trim(), r-44, `a=${a}`);
-      marker(sb, getComputedStyle(document.documentElement).getPropertyValue('--b').trim(), r-60, `b=${b}`);
-      marker(ssum, getComputedStyle(document.documentElement).getPropertyValue('--sum').trim(), r-28, `a⊕b=${mod(a+b,N)}`);
+      const css = getComputedStyle(document.documentElement);
+      marker(sa, css.getPropertyValue('--a').trim(), r-44, `a=${a}`);
+      marker(sb, css.getPropertyValue('--b').trim(), r-60, `b=${b}`);
+      marker(ssum, css.getPropertyValue('--sum').trim(), r-28, `a⊕b=${mod(a+b,N)}`);
     }
 
     clockHost.innerHTML = '';
@@ -190,37 +197,66 @@
     return { update };
   }
 
+  // Build interactive table with dropdowns
   function buildTable() {
     const tbl = document.createElement('table');
     const thead = document.createElement('thead');
     const thr = document.createElement('tr');
     thr.appendChild(document.createElement('th')); // corner
-    for (let j=0;j<N;j++){ const th=document.createElement('th'); th.textContent=j; thr.appendChild(th); }
+    for (let j=0;j<N;j++){ const th=document.createElement('th'); th.textContent=j; th.style.cursor='pointer';
+      th.addEventListener('click',()=>{ inB.value=j; render(); }); thr.appendChild(th); }
     thead.appendChild(thr);
     tbl.appendChild(thead);
 
     const tbody = document.createElement('tbody');
+
     for (let i=0;i<N;i++){
       const tr = document.createElement('tr');
-      const th = document.createElement('th'); th.textContent = i; th.style.background='#e2e8f0'; tr.appendChild(th);
+
+      const th = document.createElement('th');
+      th.textContent = i;
+      th.style.background = '#e2e8f0';
+      th.style.cursor = 'pointer';
+      th.addEventListener('click',()=>{ inA.value=i; render(); });
+      tr.appendChild(th);
+
       for (let j=0;j<N;j++){
         const td = document.createElement('td');
-        td.className='clickable';
         td.dataset.i=i; td.dataset.j=j;
-        td.textContent = mod(i+j,N);
-        td.addEventListener('click', (e)=>{
-          // click sets a=i, Shift+click sets b=j
-          if (e.shiftKey) { inB.value = j; } else { inA.value = i; }
-          render();
+
+        const sel = document.createElement('select');
+        sel.className = 'answer';
+        sel.innerHTML = `<option value="" selected>?</option>` + Array.from({length:N},(_,k)=>`<option value="${k}">${k}</option>`).join('');
+        sel.addEventListener('change', ()=>{
+          const correct = mod(i+j,N);
+          const val = sel.value === "" ? null : parseInt(sel.value,10);
+          td.classList.remove('ok','bad');
+          if (val === null) { updateProgress(); return; }
+          if (val === correct) {
+            td.classList.add('ok');
+            sel.disabled = true;
+          } else {
+            td.classList.add('bad');
+          }
+          updateProgress();
         });
+
+        td.appendChild(sel);
         tr.appendChild(td);
       }
       tbody.appendChild(tr);
     }
+
     tbl.appendChild(tbody);
     tableArea.innerHTML = '';
     tableArea.appendChild(tbl);
     return tbl;
+  }
+
+  function updateProgress(){
+    const selects = tableArea.querySelectorAll('select.answer');
+    const ok = Array.from(selects).filter(s => s.disabled).length;
+    progress.textContent = `${ok} / ${N*N} correct`;
   }
 
   let clock = null, table = null;
@@ -234,9 +270,9 @@
     clock.update(a,b);
 
     if (!table) table = buildTable();
-    // clear highlights
+
+    // highlights
     table.querySelectorAll('td').forEach(td => td.classList.remove('hl-row','hl-col','hl-cell'));
-    // highlight row a and col b, and their cell
     const bodyRows = table.querySelectorAll('tbody tr');
     bodyRows.forEach((tr,ri)=>{
       tr.querySelectorAll('td').forEach((td,cj)=>{
@@ -245,13 +281,55 @@
         if (ri===a && cj===b) td.classList.add('hl-cell');
       });
     });
+
+    updateProgress();
   }
 
+  // Buttons
   $('#rand').addEventListener('click', ()=>{
     inA.value = Math.floor(Math.random()*N);
     inB.value = Math.floor(Math.random()*N);
     render();
   });
+
+  btnCheck.addEventListener('click', ()=>{
+    tableArea.querySelectorAll('td').forEach(td=>{
+      const sel = td.querySelector('select.answer');
+      if (!sel || sel.disabled) return;
+      const i = parseInt(td.dataset.i,10), j = parseInt(td.dataset.j,10);
+      const correct = mod(i+j,N);
+      const val = sel.value === "" ? null : parseInt(sel.value,10);
+      td.classList.remove('ok','bad');
+      if (val === correct) { td.classList.add('ok'); sel.disabled = true; }
+      else if (val !== null) { td.classList.add('bad'); }
+    });
+    updateProgress();
+  });
+
+  btnReveal.addEventListener('click', ()=>{
+    tableArea.querySelectorAll('td').forEach(td=>{
+      const sel = td.querySelector('select.answer');
+      if (!sel || sel.disabled) return;
+      const i = parseInt(td.dataset.i,10), j = parseInt(td.dataset.j,10);
+      const correct = mod(i+j,N);
+      sel.value = String(correct);
+      sel.disabled = true;
+      td.classList.remove('bad'); td.classList.add('ok');
+    });
+    updateProgress();
+  });
+
+  btnReset.addEventListener('click', ()=>{
+    tableArea.querySelectorAll('td').forEach(td=>{
+      const sel = td.querySelector('select.answer');
+      if (!sel) return;
+      sel.disabled = false;
+      sel.value = "";
+      td.classList.remove('ok','bad','hl-row','hl-col','hl-cell');
+    });
+    updateProgress();
+  });
+
   inA.addEventListener('input', render);
   inB.addEventListener('input', render);
   window.addEventListener('resize', ()=>{ clock=null; render(); });

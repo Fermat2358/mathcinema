@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+    <html lang="en">
+          <head>
+            <meta charset="utf-8" />
+            <title>Web Sketchpad</title>
+            <script charset="utf-8" type="text/javascript" src="https://gsptest.scratchconsortium.com/wsp/gsphost_v1/js/jquery-2.1.0.min.js"></script>
+            <script charset="utf-8" type="text/javascript" src="https://gsptest.scratchconsortium.com/wsp/gsphost_v1/js/wsp-min.js"></script>
+            <script charset="utf-8" type="text/javascript" src="https://gsptest.scratchconsortium.com/wsp/gsphost_v1/js/wsp-runner.js"></script>
+            <script charset="utf-8" type="text/javascript">
+                var sketch = {
+  "metadata" : {
+    "width" : 1303,
+    "height" : 827,
+    "wsp-version" : "4.8.0",
+    "exporter-version" : "5.10",
+    "exporter-build" : "3058",
+    "exporter-debug" : false,
+    "original-document-name" : "straight_lines",
+    "start-page" : "1"
+    },
+  "resources" : {
+    "fontList" : [
+      "\"Times New Roman\", serif",
+      "\"Arial\", sans-serif"
+      ]
+    },
+  "pages" : [
+    {
+      "metadata" : {
+        "title" : "1",
+        "id" : "1",
+        "sketchRect" : {
+          "top" : -10,
+          "left" : 15,
+          "bottom" : 817,
+          "right" : 1318
+          }
+        },
+      "preferences" : {
+        "units" : {
+          "length" : "cm",
+          "angle" : "deg"
+          },
+        "precision" : {
+          "length" : 2,
+          "angle" : 0,
+          "scalar" : 2
+          },
+        "colorableComponents" : {
+          "CoordSys" : {
+            "color" : "red"
+            },
+          "TextGObject_BackgroundContrast" : {
+            "color" : "rgb(255,128,0)"
+            },
+          "ActionButton" : {
+            "color" : "lime"
+            },
+          "Axis" : {
+            "color" : "lime"
+            }
+          },
+        "text" : {
+          "mathItalicization" : true,
+          "textTypes" : {
+            "Label" : {
+              "font-family" : "\"Times New Roman\", serif",
+              "font-size" : 36,
+              "color" : "aqua"
+              },
+            "Caption" : {
+              "font-family" : "\"Arial\", sans-serif",
+              "font-size" : 12,
+              "font-weight" : "bold",
+              "font-style" : "italic",
+              "color" : "rgb(255,179,22)"
+              },
+            "Measurement" : {
+              "font-family" : "\"Times New Roman\", serif",
+              "font-size" : 24,
+              "font-weight" : "bold"
+              },
+            "Action" : {
+              "label" : {
+                "font-family" : "\"Arial\", sans-serif",
+                "font-size" : 24,
+                "color" : "rgb(154,222,65)"
+                }
+              },
+            "Table" : {
+              "font-family" : "\"Arial\", sans-serif",
+              "font-size" : 24
+              },
+            "AxisTicksAndOptionalLabel" : {
+              "font-family" : "\"Arial\", sans-serif",
+              "color" : "rgb(255,128,0)"
+              }
+            }
+          },
+        "fadeTraces" : true,
+        "fadeHalfLife" : 4
+        },
+      "objects" : {
+        "1" : {
+          "kind" : "Point",
+          "genus" : "OriginPoint",
+          "constraint" : "Free",
+          "geom" : {
+            "loc" : {
+              "x" : 639,
+              "y" : 491
+              }
+            }
+          },
+        "2" : {
+          "kind" : "Point",
+          "genus" : "UnitPoint",
+          "parents" : {
+            "origin" : "1"
+            },
+          "value" : 45.346456692913421,
+          "constraint" : "HorizontalUnitPoint"
+          },
+        "3" : {
+          "kind" : "Axis",
+          "genus" : "Axis",
+          "parents" : {
+            "origin" : "1",
+            "unitPoint" : "2"
+            },
+          "constraint" : "AxisInternalDist",
+          "orientation" : "horizontal",
+          "label" : "x",
+          "style" : {
+            "label" : {
+              "showLabel" : false
+              },
+            "width" : 1
+            }
+          },
+        "4" : {
+          "kind" : "Point",
+          "genus" : "UnitPoint",
+          "parents" : {
+            "unitPoint" : "2"
+            },
+          "constraint" : "UnitPointInternalSquare",
+          "style" : {
+            "hidden" : true
+            }
+          },
+        "5" : {
+          "kind" : "Axis",
+          "genus" : "Axis",
+          "parents" : {
+            "origin" : "1",
+            "unitPoint" : "4"
+            },
+          "constraint" : "AxisInternalDist",
+          "orientation" : "vertical",
+          "label" : "y",
+          "style" : {
+            "label" : {
+              "showLabel" : false
+              },
+            "width" : 1
+            }
+          },
+        "6" : {
+          "kind" : "CoordSys",
+          "genus" : "CoordSys",
+          "parents" : {
+            "axisX" : "3",
+            "axisY" : "5"
+            },
+          "constraint" : "CoordSys",
+          "shape" : "square",
+          "style" : {
+            "grid" : "gridlines"
+            }
+          },
+        "7" : {
+          "kind" : "Expression",
+          "genus" : "ScalarParameter",
+          "constraint" : "Free",
+          "geom" : {
+            "loc" : {
+              "x" : 279,
+              "y" : 49
+              }
+            },
+          "expressionType" : "UniMeasure_ExprType",
+          "expression" : "3",
+          "label" : "x",
+          "style" : {
+            "color" : "rgb(255,128,0)",
+            "precision" : 2,
+            "nameOrigin" : "namedFromLabel",
+            "contenteditable" : true
+            }
+          },
+        "8" : {
+          "kind" : "Expression",
+          "genus" : "ScalarParameter",
+          "constraint" : "Free",
+          "geom" : {
+            "loc" : {
+              "x" : 276,
+              "y" : 93
+              }
+            },
+          "expressionType" : "UniMeasure_ExprType",
+          "expression" : "1",
+          "label" : "m",
+          "style" : {
+            "color" : "rgb(255,128,0)",
+            "precision" : 2,
+            "nameOrigin" : "namedFromLabel",
+            "contenteditable" : true
+            }
+          },
+        "9" : {
+          "kind" : "Expression",
+          "genus" : "ScalarParameter",
+          "constraint" : "Free",
+          "geom" : {
+            "loc" : {
+              "x" : 278,
+              "y" : 139
+              }
+            },
+          "expressionType" : "UniMeasure_ExprType",
+          "expression" : "1",
+          "label" : "c",
+          "style" : {
+            "color" : "rgb(255,128,0)",
+            "precision" : 2,
+            "nameOrigin" : "namedFromLabel",
+            "contenteditable" : true
+            }
+          },
+        "10" : {
+          "kind" : "Expression",
+          "genus" : "ScalarMeasure",
+          "parents" : {
+            "0" : "8",
+            "1" : "7",
+            "2" : "9"
+            },
+          "constraint" : "Calculation",
+          "geom" : {
+            "loc" : {
+              "x" : 388,
+              "y" : 52
+              }
+            },
+          "expressionType" : "UniMeasure_ExprType",
+          "expression" : "@0*@1+@2",
+          "label" : "y",
+          "style" : {
+            "color" : "rgb(255,128,0)",
+            "precision" : 2,
+            "nameOrigin" : "namedFromLabel"
+            }
+          },
+        "11" : {
+          "kind" : "Button",
+          "genus" : "Action",
+          "parents" : {
+            "0" : "7"
+            },
+          "geom" : {
+            "loc" : {
+              "x" : 279,
+              "y" : 6
+              }
+            },
+          "label" : "Plot Points",
+          "constraint" : "ActionButtonAnimate",
+          "messages" : [
+            "Plot Points"
+            ],
+          "animationStates" : [
+            {
+              "rate" : 1,
+              "timeInterval" : 2,
+              "repeat" : true,
+              "motionType" : "both",
+              "lowerParamBound" : -5,
+              "upperParamBound" : 5,
+              "discrete" : true
+              }
+            ]
+          },
+        "12" : {
+          "kind" : "Point",
+          "genus" : "PlottedPoint",
+          "parents" : {
+            "coordX" : "7",
+            "coordY" : "10",
+            "coordSys" : "6"
+            },
+          "constraint" : "PlotMarkedXMarkedY",
+          "label" : "A",
+          "style" : {
+            "traced" : true,
+            "label" : {
+              "showLabel" : true,
+              "labelOffsetX" : 8,
+              "labelOffsetY" : 5
+              }
+            }
+          },
+        "13" : {
+          "kind" : "Text",
+          "genus" : "Coordinate",
+          "parents" : {
+            "point" : "12",
+            "coordSys" : "6"
+            },
+          "constraint" : "MeasurementRectCoordinates",
+          "geom" : {
+            "loc" : {
+              "x" : 955,
+              "y" : 179
+              }
+            },
+          "style" : {
+            "font-size" : 30
+            }
+          },
+        "14" : {
+          "kind" : "Text",
+          "genus" : "Caption",
+          "constraint" : "Free",
+          "geom" : {
+            "loc" : {
+              "x" : 761,
+              "y" : 513
+              }
+            },
+          "textMFS" : "<VL<T'Things to Explore....'><0><T'1. Click on button to plot some points.  Once you have several points, click on the'><T'button again to stop plotting.'><0><T'2. Observe the x and y-coordinates of each point as they are plotted.'><0><T'3.  What is the relationship between the x and y - coordinates of each point that lies on'><T'the straight line that has been plotted?'><0><T'4.  Try to express this relationship in the form of an equation y = ....'><0><T'5.  Click in the boxes to change the values of x, m and c.'><0><T'6.  Click on the Plot Points button to plot some points.'><0><T'7.  What is the relationship between the x and y - coordinates of each point that lies on'><T'the straight line that has been plotted now?'><0><T'8. Try to express this relationship in the form of an equation y = ....'><0><T'9.  Repeat the steps above several times.'><0><T'10. What impact does changing the values of m and c have on the equation each time?'><0><0><F110xx1F4x20x2100800x>>"
+          }
+        }
+      }
+    ]
+  };
+            </script>
+            <style type="text/css">
+                .sketch_canvas {border: medium solid lightgray; display: inline-block;}
+            </style>
+        </head>
+        <body role="main">
+            <div class="sketch_canvas" data-var="sketch" >&nbsp;</div>
+            
+        </body>
+    </html>
+    

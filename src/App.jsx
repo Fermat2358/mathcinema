@@ -33,7 +33,19 @@ const initialFilms = [
     includes: ["Mastered 1080p MP4", "Teacher notes & scene prompts", "Captions (EN)"],
     tags: ["Cartesian geometry", "History", "Philosophy"],
     embedSrc: "https://player.vimeo.com/video/1118483220?h=b02ee66cb9",
+    // NEW: activity (single option for now)
+  activity: {
+    options: [
+      {
+        key: "straight",
+        label: "Straight Lines",
+        path: "/activities/descartes/straight_lines.html"
+      }
+    ],
+    defaultKey: "straight"
   },
+},
+  
   {
     id: "pythagoras",
     title: "The Harmony of Numbers (Pythagoras)",

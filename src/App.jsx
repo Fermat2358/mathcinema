@@ -1,4 +1,15 @@
 import React, { useEffect, useMemo, useState } from "react";
+// Ensures Vimeo embeds are cookie-free (and optionally autoplay muted)
+const buildVimeoSrc = (raw, { autoplay = false } = {}) => {
+  const add = (k,v) => (u) => u + (u.includes("?") ? "&" : "?") + `${k}=${v}`;
+  let url = raw || "";
+  if (!/(\?|&)dnt=1(\b|&)/.test(url)) url = add("dnt", "1")(url);
+  if (autoplay) {
+    if (!/(\?|&)autoplay=1(\b|&)/.test(url)) url = add("autoplay", "1")(url);
+    if (!/(\?|&)muted=1(\b|&)/.test(url))    url = add("muted", "1")(url);
+  }
+  return url;
+};
 
 /* ========= Film catalog ========= */
 const initialFilms = [
@@ -96,7 +107,7 @@ activityTitle: "Squares on a Right Triangle (Web Sketchpad)",
   trailerLink: "#",
   includes: ["Mastered 1080p MP4", "Teacher notes & scene prompts", "Captions (EN)"],
   tags: ["Symmetry", "Algebra", "Women in Maths"],
-  embedSrc: "https://player.vimeo.com/video/1118491830?h=890a64cc3f",
+  embedSrc: "https://player.vimeo.com/video/1118491830?h=890a64cc3f&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479",
   activity: {
     options: [
       { key: "reflections", label: "Reflections", path: "/activities/emmy/reflections.html" },
@@ -125,7 +136,34 @@ activityTitle: "Squares on a Right Triangle (Web Sketchpad)",
     ],
     defaultKey: "clock6"
   }
+},
+{
+  id: "fibonacci",
+  title: "The Spiral of Light",
+  tagline: "Where numbers bloom into nature’s secret pattern.",
+  priceGBP: 15.0,
+  duration: "3m 40s",
+  level: "KS3–KS4",
+  cover: "/posters/fibonacci-v3.jpg",             // put the new poster here
+  purchaseLink: "https://buy.stripe.com/5kQeVeeqMaQY6CRe7V8N208",
+  trailerLink: "#",
+  includes: ["Mastered 1080p MP4", "Teacher notes & prompts (soon)", "Captions (EN)"],
+  tags: ["Fibonacci", "Nature", "Sequences", "Golden Ratio"],
+  // Use just the Vimeo player URL (your app already wraps it in an <iframe>)
+  embedSrc:"https://player.vimeo.com/video/1140772794?h=63ac4aa635&dnt=1",
+  // Simple single-activity hook (your UI already supports film.activityPath)
+  activity: {
+    options: [
+      {
+        key: "rabbits",
+        label: "Rabbit challenge",
+        path: "/activities/fibonacci/rabbit-challenge.html",
+      },
+    ],
+    defaultKey: "rabbits",
+  },
 }
+
 
 
 
@@ -235,7 +273,7 @@ useEffect(() => {
             <div key={item.id}>
               <div className="relative pt-[56.25%] rounded-2xl overflow-hidden bg-slate-900 shadow-lg">
                 <iframe
-                  src={item.embedSrc}
+                  src={buildVimeoSrc(item.embedSrc, { autoplay: false })}
                   className="absolute inset-0 h-full w-full"
                   frameBorder="0"
                   allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
@@ -250,7 +288,7 @@ useEffect(() => {
     ) : film?.embedSrc ? (
       <div className="relative pt-[56.25%] rounded-2xl overflow-hidden bg-slate-900 shadow-lg">
         <iframe
-          src={film.embedSrc}
+          src={buildVimeoSrc(film.embedSrc, { autoplay: false })}
           className="absolute inset-0 h-full w-full"
           frameBorder="0"
           allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"

@@ -170,7 +170,7 @@ activityTitle: "Squares on a Right Triangle (Web Sketchpad)",
   priceGBP: 10.00,
   duration: "2m 28s",
   level: "KS3–KS4",
-  posterSRC: "/posters/euler-v1.jpg",
+  cover: "/posters/euler-v1.jpg",
   purchaseLink: "https://buy.stripe.com/fZu9AUgyU2ks6CR6Ft8N209",
   trailer: "#", // or replace with a trailer URL later
   embedSrc: "https://player.vimeo.com/video/1141766184?h=6cab270d17&badge=0&autopause=0&player_id=0&app_id=58479",

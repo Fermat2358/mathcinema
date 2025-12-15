@@ -1,4 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
+import RequireMembership from "./RequireMembership";
+import { supabase } from "./supabaseClient";
+
 // Ensures Vimeo embeds are cookie-free (and optionally autoplay muted)
 const buildVimeoSrc = (raw, { autoplay = false } = {}) => {
   const add = (k,v) => (u) => u + (u.includes("?") ? "&" : "?") + `${k}=${v}`;
@@ -217,6 +220,16 @@ const currency = (n) => `£${Number(n).toFixed(2)} GBP`;
 
 /* ========= App ========= */
 export default function App() {
+  React.useEffect(() => {
+  const run = async () => {
+    if (window.location.pathname === "/auth/callback") {
+      const { error } = await supabase.auth.exchangeCodeForSession(window.location.href);
+      // even if error, send them somewhere sensible
+      window.location.replace("/#museum");
+    }
+  };
+  run();
+}, []);
   const [showActivity, setShowActivity] = useState(false);
 const [activityKey, setActivityKey] = useState(null);
 
@@ -390,7 +403,8 @@ useEffect(() => {
       {selected && (
         <FilmModal film={selected} onClose={() => setSelected(null)} />
       )}
-      <SiteFooter />
+      {route === "pricing" && <Pricing />}
+<SiteFooter />
     </div>
   );
 }
@@ -419,6 +433,7 @@ function SiteNav({ route }) {
           <Link hash="#home">Home</Link>
           <Link hash="#films">Films</Link>
           <Link hash="#museum">VR Museum</Link>
+          <Link hash="#pricing">Pricing</Link>
           <Link hash="#about">About</Link>
           <Link hash="#contact">Contact</Link>
         </div>
@@ -583,22 +598,25 @@ function Museum() {
         </p>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <VRCard
-          title="Frame VR Museum"
-          description="Virtual gallery of the great mathematicians in history."
-          cover="/posters/framevr.png"
-          primaryLabel="Open in Frame VR"
-          primaryLink="https://framevr.io/cvw-olz-xsp"
-        />
-        <VRCard
-          title="Virtway · Maths History Escape Room"
-          description="Multi-user 3D environment with guided tours and live escape-room puzzles."
-          cover="/posters/virtway.png"
-          primaryLabel="Enter on Virtway"
-          primaryLink="https://webgl.virtway.com/vyxzghkx/894e00ff-d7eb-416b-a9ab-9a7005c9edd1"
-        />
-      </div>
+     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+  <RequireMembership subscribeHash="#pricing">
+    <VRCard
+      title="Frame VR Museum"
+      description="Virtual gallery of the great mathematicians in history."
+      cover="/posters/framevr.png"
+      primaryLabel="Open in Frame VR"
+      primaryLink="https://framevr.io/cvw-olz-xsp"
+    />
+
+    <VRCard
+      title="Virtway · Maths History Escape Room"
+      description="Multi-user 3D environment with guided tours and live escape-room puzzles."
+      cover="/posters/virtway.png"
+      primaryLabel="Enter on Virtway"
+      primaryLink="https://webgl.virtway.com/...."
+    />
+  </RequireMembership>
+</div>
     </section>
   );
 }
@@ -624,6 +642,167 @@ function VRCard({ title, description, cover, primaryLabel, primaryLink }) {
 }
 
 /* ========= About / Contact / Footer ========= */
+function Pricing() {
+  const [billing, setBilling] = React.useState("monthly"); // "monthly" | "yearly"
+
+  const stripe = {
+    family: {
+      monthly: "https://buy.stripe.com/28EcN66Ykgbi0etfbZ8N20a",
+      yearly: "https://buy.stripe.com/4gMaEY0zW3ow8KZ2pd8N20b",
+    },
+    schools: {
+      monthly: "https://buy.stripe.com/5kQ8wQ6Yk8IQ6CR2pd8N20c",
+      yearly: "https://buy.stripe.com/4gM4gAgyUf7e4uJbZN8N20d",
+    },
+  };
+
+  const priceText = (m, y) => (billing === "monthly" ? m : y);
+
+  return (
+    <section id="pricing" className="py-12 space-y-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="space-y-2 max-w-3xl">
+        <h2 className="text-3xl font-bold">Pricing</h2>
+        <p className="text-slate-300">
+          Choose single films, or unlock full access to all films, activities, the Museum, and the Escape Room.
+        </p>
+      </div>
+
+      <div className="inline-flex rounded-full border border-white/10 bg-white/5 p-1">
+        <button
+          onClick={() => setBilling("monthly")}
+          className={`px-4 py-2 rounded-full text-sm font-semibold ${
+            billing === "monthly" ? "bg-white/10 text-white" : "text-slate-300"
+          }`}
+          type="button"
+        >
+          Monthly
+        </button>
+        <button
+          onClick={() => setBilling("yearly")}
+          className={`px-4 py-2 rounded-full text-sm font-semibold ${
+            billing === "yearly" ? "bg-white/10 text-white" : "text-slate-300"
+          }`}
+          type="button"
+        >
+          Yearly (save 2 months)
+        </button>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        {/* Tier 1 */}
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-4">
+          <div className="text-xs font-bold text-slate-200 bg-white/5 border border-white/10 inline-block px-3 py-1 rounded-full">
+            Tier 1
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold">Family &amp; Homeschool</h3>
+            <div className="text-3xl font-bold mt-2">
+              {priceText("£20", "£200")}
+              <span className="text-sm text-slate-300 font-semibold">
+                {billing === "monthly" ? " / month" : " / year"}
+              </span>
+            </div>
+            {billing === "yearly" && <div className="text-emerald-300 text-sm font-bold">Save £40 with yearly</div>}
+          </div>
+
+          <ul className="space-y-2 text-slate-200">
+            <li>• Full access to all films (while subscribed)</li>
+            <li>• All Maths Activities for every film</li>
+            <li>• Maths History Museum (full access)</li>
+            <li>• Escape Room (full access)</li>
+            <li>• New releases included during membership</li>
+          </ul>
+
+          <div className="flex flex-wrap gap-3">
+            <a
+              href={billing === "monthly" ? stripe.family.monthly : stripe.family.yearly}
+              className="px-4 py-2 rounded-xl font-bold bg-cyan-500/20 border border-cyan-400/30 hover:bg-cyan-500/30"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Start Family Membership
+            </a>
+            <a
+              href={stripe.family.yearly}
+              className="px-4 py-2 rounded-xl font-bold bg-white/5 border border-white/10 hover:bg-white/10"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Choose Yearly
+            </a>
+          </div>
+
+          <p className="text-sm text-slate-300">
+            Ideal for home learning, curious families, and weekend maths explorers.
+          </p>
+        </div>
+
+        {/* Tier 2 */}
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-4">
+          <div className="text-xs font-bold text-slate-200 bg-white/5 border border-white/10 inline-block px-3 py-1 rounded-full">
+            Tier 2
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold">Schools</h3>
+            <div className="text-3xl font-bold mt-2">
+              {priceText("£50", "£500")}
+              <span className="text-sm text-slate-300 font-semibold">
+                {billing === "monthly" ? " / month" : " / year"}
+              </span>
+            </div>
+            {billing === "yearly" && <div className="text-emerald-300 text-sm font-bold">Save £100 with yearly</div>}
+          </div>
+
+          <ul className="space-y-2 text-slate-200">
+            <li>• Full access to all films (while subscribed)</li>
+            <li>• All Maths Activities for every film</li>
+            <li>• Maths History Museum (full access)</li>
+            <li>• Escape Room (full access)</li>
+            <li>• New releases included during subscription</li>
+            <li>• One school site up to 1000 students</li>
+            <li>• Unlimited teacher accounts</li>
+          </ul>
+
+          <div className="flex flex-wrap gap-3">
+            <a
+              href={billing === "monthly" ? stripe.schools.monthly : stripe.schools.yearly}
+              className="px-4 py-2 rounded-xl font-bold bg-emerald-500/20 border border-emerald-400/30 hover:bg-emerald-500/30"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Start Schools Membership
+            </a>
+            <a
+              href={stripe.schools.yearly}
+              className="px-4 py-2 rounded-xl font-bold bg-white/5 border border-white/10 hover:bg-white/10"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Choose Yearly
+            </a>
+            <a href="#contact" className="px-4 py-2 rounded-xl font-bold bg-white/5 border border-white/10 hover:bg-white/10">
+              Multi-campus or trust? Contact us
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="rounded-2xl border border-white/10 bg-white/5 p-6 space-y-3">
+        <h3 className="text-xl font-semibold">Single Film + Activities</h3>
+        <p className="text-slate-300">
+          Buy one film and its Maths Activities pack. The Museum and Escape Room are included with Full Access Membership only.
+        </p>
+        <ul className="space-y-1 text-slate-200">
+          <li>• Includes: 1 selected film + the Maths Activities for that film</li>
+          <li>• Does not include: Museum, Escape Room, or access to other films</li>
+        </ul>
+        <div className="text-sm text-slate-300">
+          Browse films below and use the “Buy” button on the film you want.
+        </div>
+      </div>
+    </section>
+  );
+}
 function About() {
   return (
     <section className="py-12 space-y-3 max-w-3xl">
@@ -640,7 +819,7 @@ function Contact() {
     <section className="py-12 space-y-3 max-w-3xl">
       <h2 className="text-3xl font-bold">Contact</h2>
       <p className="text-slate-300">
-        Questions, school licensing, or collaborations? Email{" "}
+        Questions, school licensing, or subscriptions help? Email{" "}
         <a href="mailto:gerrydocherty@gmail.com" className="text-cyan-300 underline">gerrydocherty@gmail.com</a>.
       </p>
     </section>
@@ -660,6 +839,7 @@ function SiteFooter() {
           <ul className="space-y-1 mt-2">
             <li><a href="#films" className="hover:underline">Films</a></li>
             <li><a href="#museum" className="hover:underline">VR Museum</a></li>
+            <li><a href="#pricing" className="hover:underline">Pricing</a></li>
             <li><a href="#about" className="hover:underline">About</a></li>
             <li><a href="#contact" className="hover:underline">Contact</a></li>
           </ul>
@@ -670,6 +850,7 @@ function SiteFooter() {
             <li>Single film license — educational use</li>
             <li>Site licenses available on request</li>
             <li>Payments via Stripe</li>
+            <li><a href="#contact" className="hover:underline">Manage subscription</a></li>
           </ul>
         </div>
       </div>

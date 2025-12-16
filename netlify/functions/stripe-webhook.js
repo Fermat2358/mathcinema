@@ -38,6 +38,7 @@ exports.handler = async (event) => {
   // Map your Price IDs → tiers
   // (Using the IDs you gave me)
   const PRICE_TO_TIER = {
+    "price_1SeYVQLm1jEfERQEzYJlqelj": "family",
     price_1SeBrcLm1jEfERQERFsc8G53: "family",  // Family Monthly
     price_1SeBrcLm1jEfERQETSMyn9Zm: "family",  // Family Yearly
     price_1SeC1hLm1jEfERQEUbxerbYB: "schools", // Schools Monthly

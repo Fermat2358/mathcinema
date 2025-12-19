@@ -99,7 +99,10 @@ exports.handler = async (event) => {
         let tier = null;
 
         if (subscriptionId) {
-          const sub = await stripe.subscriptions.retrieve(subscriptionId);
+          const sub = await stripe.subscriptions.retrieve(subscriptionId, {
+  expand: ["items.data.price"],
+});
+
 
           status = sub.status || "active";
           currentPeriodEndIso = sub.current_period_end
@@ -161,8 +164,10 @@ if (priceId) {
         const currentPeriodEndIso = sub.current_period_end
           ? new Date(sub.current_period_end * 1000).toISOString()
           : null;
-
-        await supabaseUpsertMembership({
+console.log("subscriptionId", subscriptionId);
+console.log("priceId", priceId);
+console.log("tier from price metadata", tier);
+await supabaseUpsertMembership({
           email,
           tier: tier || "unknown",
           status: status || "unknown",

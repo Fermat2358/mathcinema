@@ -35,17 +35,6 @@ exports.handler = async (event) => {
     return { statusCode: 400, body: `Webhook signature verification failed: ${err.message}` };
   }
 
-  // Map your Price IDs → tiers
-  // (Using the IDs you gave me)
-  const PRICE_TO_TIER = {
-  // Family (Test)
-  "price_1SeYVQLm1jEfERQEzYJlqeIj": "family",  // Family Monthly Test
-  "price_1SeYcxLm1jEfERQEnRaFumCf": "family",  // Family Yearly Test
-
-  // Schools (Test)
-  "price_1SeYgjLm1jEfERQEsPsNDVun": "schools", // Schools Monthly Test
-  "price_1SeYi7Lm1jEfERQEAxZDvDXQ": "schools", // Schools Yearly Test
-};
 
 
   // Minimal Supabase REST call (no extra package needed)
@@ -126,7 +115,17 @@ exports.handler = async (event) => {
           priceId = lines.data?.[0]?.price?.id || null;
         }
 
-        tier = priceId ? PRICE_TO_TIER[priceId] : null;
+       tier = "unknown";
+if (priceId) {
+  try {
+    const price = await stripe.prices.retrieve(priceId);
+    tier = (price?.metadata?.tier || "unknown").trim.toLowerCase();
+  } catch (e) 
+  {console.error("Failed to retrieve price", priceId, e);
+    tier = "unknown";
+  }
+}
+
 
         await supabaseUpsertMembership({
           email,

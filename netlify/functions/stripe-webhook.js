@@ -119,7 +119,8 @@ exports.handler = async (event) => {
 if (priceId) {
   try {
     const price = await stripe.prices.retrieve(priceId);
-    tier = (price?.metadata?.tier || "unknown").trim.toLowerCase();
+    tier = (price?.metadata?.tier || "unknown").trim().toLowerCase();
+
   } catch (e) 
   {console.error("Failed to retrieve price", priceId, e);
     tier = "unknown";

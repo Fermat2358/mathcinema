@@ -65,6 +65,7 @@ async function upsertMembership({
   stripe_subscription_id,
   price_id,
   current_period_end,
+  cancel_at_period_end,
 }) {
   if (!email) {
     console.warn("upsertMembership skipped: missing email");
@@ -79,6 +80,7 @@ async function upsertMembership({
     stripe_subscription_id: stripe_subscription_id || null,
     price_id: price_id || null,
     current_period_end: current_period_end || null,
+    cancel_at_period_end: !!cancel_at_period_end,
     updated_at: new Date().toISOString(),
   };
 
@@ -154,6 +156,7 @@ exports.handler = async (event) => {
           stripe_subscription_id: sub.id,
           price_id: priceId,
           current_period_end: currentPeriodEndIso,
+          cancel_at_period_end: !!sub.cancel_at_period_end,
         });
 
         break;

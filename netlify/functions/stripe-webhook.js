@@ -208,3 +208,4 @@ await supabaseUpsertMembership({
     return { statusCode: 500, body: `Webhook handler error: ${err.message}` };
   }
 };
+// debug

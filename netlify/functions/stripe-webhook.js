@@ -1,7 +1,6 @@
 // netlify/functions/stripe-webhook.js
-
-const Stripe = require("stripe");
-const { createClient } = require("@supabase/supabase-js");
+import Stripe from "stripe";
+import { createClient } from "@supabase/supabase-js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-07-30.basil",
@@ -12,81 +11,56 @@ const supabase = createClient(
   process.env.SUPABASE_SERVICE_ROLE_KEY
 );
 
-// ---------- Helpers ----------
-function getRawBody(event) {
-  if (!event.body) return Buffer.from("");
-  return event.isBase64Encoded
-    ? Buffer.from(event.body, "base64")
-    : Buffer.from(event.body, "utf8");
-}
-
-async function getCustomerEmail(customerId) {
-  if (!customerId) return null;
-  const customer = await stripe.customers.retrieve(customerId);
-  return customer?.email || null;
+function json(statusCode, body) {
+  return {
+    statusCode,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  };
 }
 
 function normalizeStatus(sub) {
-  // Keep your app logic simple: "active" while active/trialing, otherwise "inactive"
+  // Keep app logic simple:
+  // treat "trialing" + "active" as "active"; everything else as "inactive"
   if (!sub) return "unknown";
   if (sub.status === "active" || sub.status === "trialing") return "active";
   return "inactive";
 }
 
+function unixToIso(unixSeconds) {
+  if (!unixSeconds) return null;
+  return new Date(unixSeconds * 1000).toISOString();
+}
+
 function getTierFromSubscription(sub) {
-  // Pull tier from Price metadata: price.metadata.tier
-  // If you haven’t set it in Stripe, you’ll get "unknown"
+  // Prefer tier in price metadata: items.data[0].price.metadata.tier
   const tier =
     sub?.items?.data?.[0]?.price?.metadata?.tier ||
-    sub?.items?.data?.[0]?.price?.metadata?.plan ||
+    sub?.items?.data?.[0]?.plan?.metadata?.tier ||
     null;
 
-  return (tier || "unknown").toString().trim().toLowerCase();
+  return tier ? String(tier).trim().toLowerCase() : "unknown";
 }
 
 function getPriceIdFromSubscription(sub) {
   return sub?.items?.data?.[0]?.price?.id || null;
 }
 
-function toIsoFromUnixSeconds(sec) {
-  if (!sec) return null;
-  try {
-    return new Date(sec * 1000).toISOString();
-  } catch {
-    return null;
-  }
-}
-
-async function upsertMembership({
-  email,
-  tier,
-  status,
-  stripe_customer_id,
-  stripe_subscription_id,
-  price_id,
-  current_period_end,
-  cancel_at_period_end,
-}) {
-  if (!email) {
+async function upsertMembership(payload) {
+  if (!payload?.email) {
     console.warn("upsertMembership skipped: missing email");
     return;
   }
 
-  const payload = {
-    email,
-    tier: tier || "unknown",
-    status: status || "unknown",
-    stripe_customer_id: stripe_customer_id || null,
-    stripe_subscription_id: stripe_subscription_id || null,
-    price_id: price_id || null,
-    current_period_end: current_period_end || null,
-    cancel_at_period_end: !!cancel_at_period_end,
+  const clean = {
+    ...payload,
+    email: String(payload.email).trim().toLowerCase(),
     updated_at: new Date().toISOString(),
   };
 
   const { error } = await supabase
     .from("memberships")
-    .upsert(payload, { onConflict: "email" });
+    .upsert(clean, { onConflict: "email" });
 
   if (error) {
     console.error("Supabase upsert error:", error);
@@ -94,23 +68,31 @@ async function upsertMembership({
   }
 }
 
-// ---------- Main handler ----------
-exports.handler = async (event) => {
-  const sig = event.headers["stripe-signature"] || event.headers["Stripe-Signature"];
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+async function getCustomerEmail(customerId) {
+  if (!customerId) return null;
+  const cust = await stripe.customers.retrieve(customerId);
+  // customer can be deleted or missing email
+  return cust?.email ? String(cust.email).trim().toLowerCase() : null;
+}
 
-  if (!webhookSecret) {
-    console.error("Missing STRIPE_WEBHOOK_SECRET");
-    return { statusCode: 500, body: "Missing webhook secret" };
+export async function handler(event) {
+  if (event.httpMethod !== "POST") {
+    return json(405, { error: "Method Not Allowed" });
   }
+
+  const sig = event.headers["stripe-signature"];
+  if (!sig) return json(400, { error: "Missing stripe-signature header" });
 
   let stripeEvent;
   try {
-    const raw = getRawBody(event);
-    stripeEvent = stripe.webhooks.constructEvent(raw, sig, webhookSecret);
+    stripeEvent = stripe.webhooks.constructEvent(
+      event.body,
+      sig,
+      process.env.STRIPE_WEBHOOK_SECRET
+    );
   } catch (err) {
-    console.error("Webhook signature verification failed:", err.message);
-    return { statusCode: 400, body: `Webhook Error: ${err.message}` };
+    console.error("Webhook signature verification failed:", err?.message || err);
+    return json(400, { error: "Webhook signature verification failed" });
   }
 
   try {
@@ -118,71 +100,82 @@ exports.handler = async (event) => {
       case "checkout.session.completed": {
         const session = stripeEvent.data.object;
 
-        // Only relevant for subscription checkouts
-        if (session.mode !== "subscription" || !session.subscription) {
-          console.log("checkout.session.completed (non-subscription) ignored");
-          break;
+        // Email: usually present here
+        const email =
+          session?.customer_details?.email ||
+          session?.customer_email ||
+          null;
+
+        const customerId = session?.customer || null;
+        const subscriptionId = session?.subscription || null;
+
+        let sub = null;
+        if (subscriptionId) {
+          // Expand price so metadata.tier is available
+          sub = await stripe.subscriptions.retrieve(subscriptionId, {
+            expand: ["items.data.price"],
+          });
         }
 
-        const subscriptionId = session.subscription;
-        const customerId = session.customer;
-
-        const sub = await stripe.subscriptions.retrieve(subscriptionId, {
-          expand: ["items.data.price"],
-        });
-
-        // Try email from session first, then customer record
-        const email =
-          session.customer_details?.email ||
-          session.customer_email ||
-          (await getCustomerEmail(customerId));
-
-        const tier = getTierFromSubscription(sub);
-        const priceId = getPriceIdFromSubscription(sub);
         const status = normalizeStatus(sub);
-        const currentPeriodEndIso = toIsoFromUnixSeconds(sub.current_period_end);
+        const tier = sub ? getTierFromSubscription(sub) : "unknown";
+        const priceId = sub ? getPriceIdFromSubscription(sub) : null;
+        const currentPeriodEndIso = sub ? unixToIso(sub.current_period_end) : null;
+        const cancelAtPeriodEnd = sub ? !!sub.cancel_at_period_end : false;
 
-        console.log("checkout.session.completed → email:", email);
-        console.log("subscriptionId:", subscriptionId);
-        console.log("priceId:", priceId);
-        console.log("tier:", tier);
-        console.log("status:", status);
+        console.log("checkout.session.completed", {
+          email,
+          customerId,
+          subscriptionId,
+          status,
+          tier,
+          priceId,
+          cancelAtPeriodEnd,
+        });
 
         await upsertMembership({
           email,
           tier,
           status,
           stripe_customer_id: customerId,
-          stripe_subscription_id: sub.id,
+          stripe_subscription_id: subscriptionId,
           price_id: priceId,
           current_period_end: currentPeriodEndIso,
-          cancel_at_period_end: !!sub.cancel_at_period_end,
+          cancel_at_period_end: cancelAtPeriodEnd,
         });
 
-        break;
+        return json(200, { ok: true });
       }
 
       case "customer.subscription.updated": {
         const subObj = stripeEvent.data.object;
 
-        // Retrieve with price expanded so metadata is available
+        // IMPORTANT: subscription events do not include email reliably
+        // so we fetch it from the customer object.
+        const customerId = subObj?.customer || null;
+        const email = await getCustomerEmail(customerId);
+
+        // Ensure price metadata is present (sometimes update events include it already,
+        // but expanding makes it consistent)
         const sub = await stripe.subscriptions.retrieve(subObj.id, {
           expand: ["items.data.price"],
         });
 
-        const customerId = sub.customer;
-        const email = await getCustomerEmail(customerId);
-
+        const status = normalizeStatus(sub);
         const tier = getTierFromSubscription(sub);
         const priceId = getPriceIdFromSubscription(sub);
-        const status = normalizeStatus(sub);
-        const currentPeriodEndIso = toIsoFromUnixSeconds(sub.current_period_end);
+        const currentPeriodEndIso = unixToIso(sub.current_period_end);
+        const cancelAtPeriodEnd = !!sub.cancel_at_period_end;
 
-        console.log("customer.subscription.updated → email:", email);
-        console.log("subscriptionId:", sub.id);
-        console.log("priceId:", priceId);
-        console.log("tier:", tier);
-        console.log("status:", status);
+        console.log("customer.subscription.updated", {
+          email,
+          customerId,
+          subscriptionId: sub.id,
+          status,
+          tier,
+          priceId,
+          cancelAtPeriodEnd,
+        });
 
         await upsertMembership({
           email,
@@ -192,48 +185,43 @@ exports.handler = async (event) => {
           stripe_subscription_id: sub.id,
           price_id: priceId,
           current_period_end: currentPeriodEndIso,
+          cancel_at_period_end: cancelAtPeriodEnd,
         });
 
-        break;
+        return json(200, { ok: true });
       }
 
       case "customer.subscription.deleted": {
         const subObj = stripeEvent.data.object;
-
-        // In deleted event, prices may not be expanded, but we can still retrieve
-        const sub = await stripe.subscriptions.retrieve(subObj.id, {
-          expand: ["items.data.price"],
-        });
-
-        const customerId = sub.customer;
+        const customerId = subObj?.customer || null;
         const email = await getCustomerEmail(customerId);
 
-        const tier = getTierFromSubscription(sub);
-        const priceId = getPriceIdFromSubscription(sub);
-
-        console.log("customer.subscription.deleted → email:", email);
-        console.log("subscriptionId:", sub.id);
+        console.log("customer.subscription.deleted", {
+          email,
+          customerId,
+          subscriptionId: subObj?.id,
+        });
 
         await upsertMembership({
           email,
-          tier,
+          tier: "unknown",
           status: "inactive",
           stripe_customer_id: customerId,
-          stripe_subscription_id: sub.id,
-          price_id: priceId,
+          stripe_subscription_id: subObj?.id || null,
+          price_id: null,
           current_period_end: null,
+          cancel_at_period_end: false,
         });
 
-        break;
+        return json(200, { ok: true });
       }
 
       default:
-        console.log("Unhandled event type:", stripeEvent.type);
+        // Acknowledge other events so Stripe doesn't keep retrying
+        return json(200, { ok: true, ignored: stripeEvent.type });
     }
-
-    return { statusCode: 200, body: "ok" };
   } catch (err) {
     console.error("Webhook handler error:", err);
-    return { statusCode: 500, body: "Webhook handler error" };
+    return json(500, { error: err?.message || "Webhook handler error" });
   }
-};
+}

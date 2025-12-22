@@ -46,33 +46,55 @@ function getPriceIdFromSubscription(sub) {
   return sub?.items?.data?.[0]?.price?.id || null;
 }
 
-async function upsertMembership(payload) {
-  if (!payload?.email) {
-    console.warn("upsertMembership skipped: missing email");
-    return;
-  }
+async function getCustomerEmail(customerId) {
+  if (!customerId) return null;
 
-  const clean = {
-    ...payload,
-    email: String(payload.email).trim().toLowerCase(),
-    updated_at: new Date().toISOString(),
-  };
-
-  const { error } = await supabase
-    .from("memberships")
-    .upsert(clean, { onConflict: "email" });
-
-  if (error) {
-    console.error("Supabase upsert error:", error);
-    throw error;
+  try {
+    const cust = await stripe.customers.retrieve(customerId);
+    return cust?.email ? String(cust.email).trim().toLowerCase() : null;
+  } catch (e) {
+    console.warn("Failed to retrieve customer for email:", customerId, e?.message || e);
+    return null;
   }
 }
 
-async function getCustomerEmail(customerId) {
-  if (!customerId) return null;
-  const cust = await stripe.customers.retrieve(customerId);
-  // customer can be deleted or missing email
-  return cust?.email ? String(cust.email).trim().toLowerCase() : null;
+async function upsertMembership(payload) {
+  // Normalize + always update updated_at
+  const clean = {
+    ...payload,
+    email: payload?.email ? String(payload.email).trim().toLowerCase() : null,
+    updated_at: new Date().toISOString(),
+  };
+
+  // Preferred path: upsert by email (your memberships table uses email as conflict key)
+  if (clean.email) {
+    const { error } = await supabase
+      .from("memberships")
+      .upsert(clean, { onConflict: "email" });
+
+    if (error) {
+      console.error("Supabase upsert error:", error);
+      throw error;
+    }
+    return;
+  }
+
+  // Fallback path: if email is missing, update by stripe_customer_id
+  // (prevents missed updates on subscription.updated/deleted)
+  if (clean.stripe_customer_id) {
+    const { error } = await supabase
+      .from("memberships")
+      .update(clean)
+      .eq("stripe_customer_id", clean.stripe_customer_id);
+
+    if (error) {
+      console.error("Supabase update-by-customer error:", error);
+      throw error;
+    }
+    return;
+  }
+
+  console.warn("upsertMembership skipped: missing email and stripe_customer_id");
 }
 
 export async function handler(event) {
@@ -83,10 +105,15 @@ export async function handler(event) {
   const sig = event.headers["stripe-signature"];
   if (!sig) return json(400, { error: "Missing stripe-signature header" });
 
+  // Netlify sometimes base64-encodes the raw request body.
+  const rawBody = event.isBase64Encoded
+    ? Buffer.from(event.body, "base64").toString("utf8")
+    : event.body;
+
   let stripeEvent;
   try {
     stripeEvent = stripe.webhooks.constructEvent(
-      event.body,
+      rawBody,
       sig,
       process.env.STRIPE_WEBHOOK_SECRET
     );
@@ -100,18 +127,20 @@ export async function handler(event) {
       case "checkout.session.completed": {
         const session = stripeEvent.data.object;
 
-        // Email: usually present here
-        const email =
+        const customerId = session?.customer || null;
+        const subscriptionId = session?.subscription || null;
+
+        // Email: often present on session, but not always.
+        const sessionEmail =
           session?.customer_details?.email ||
           session?.customer_email ||
           null;
 
-        const customerId = session?.customer || null;
-        const subscriptionId = session?.subscription || null;
+        // Fallback: fetch customer email if missing
+        const email = sessionEmail || (await getCustomerEmail(customerId));
 
         let sub = null;
         if (subscriptionId) {
-          // Expand price so metadata.tier is available
           sub = await stripe.subscriptions.retrieve(subscriptionId, {
             expand: ["items.data.price"],
           });
@@ -140,13 +169,10 @@ export async function handler(event) {
       case "customer.subscription.updated": {
         const subObj = stripeEvent.data.object;
 
-        // IMPORTANT: subscription events do not include email reliably
-        // so we fetch it from the customer object.
         const customerId = subObj?.customer || null;
         const email = await getCustomerEmail(customerId);
 
-        // Ensure price metadata is present (sometimes update events include it already,
-        // but expanding makes it consistent)
+        // Retrieve subscription with expanded price metadata for tier
         const sub = await stripe.subscriptions.retrieve(subObj.id, {
           expand: ["items.data.price"],
         });
@@ -156,7 +182,6 @@ export async function handler(event) {
         const priceId = getPriceIdFromSubscription(sub);
         const currentPeriodEndIso = unixToIso(sub.current_period_end);
         const cancelAtPeriodEnd = !!sub.cancel_at_period_end;
-
 
         await upsertMembership({
           email,
@@ -174,14 +199,9 @@ export async function handler(event) {
 
       case "customer.subscription.deleted": {
         const subObj = stripeEvent.data.object;
+
         const customerId = subObj?.customer || null;
         const email = await getCustomerEmail(customerId);
-
-        console.log("customer.subscription.deleted", {
-          email,
-          customerId,
-          subscriptionId: subObj?.id,
-        });
 
         await upsertMembership({
           email,

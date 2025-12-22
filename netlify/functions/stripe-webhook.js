@@ -123,16 +123,6 @@ export async function handler(event) {
         const currentPeriodEndIso = sub ? unixToIso(sub.current_period_end) : null;
         const cancelAtPeriodEnd = sub ? !!sub.cancel_at_period_end : false;
 
-        console.log("checkout.session.completed", {
-          email,
-          customerId,
-          subscriptionId,
-          status,
-          tier,
-          priceId,
-          cancelAtPeriodEnd,
-        });
-
         await upsertMembership({
           email,
           tier,
@@ -167,15 +157,6 @@ export async function handler(event) {
         const currentPeriodEndIso = unixToIso(sub.current_period_end);
         const cancelAtPeriodEnd = !!sub.cancel_at_period_end;
 
-        console.log("customer.subscription.updated", {
-          email,
-          customerId,
-          subscriptionId: sub.id,
-          status,
-          tier,
-          priceId,
-          cancelAtPeriodEnd,
-        });
 
         await upsertMembership({
           email,

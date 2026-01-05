@@ -460,6 +460,7 @@ export default function App() {
 }
 
 /* ========= Nav ========= */
+/* ========= Nav ========= */
 function SiteNav({ route }) {
   const Link = ({ hash, children }) => (
     <a
@@ -471,6 +472,9 @@ function SiteNav({ route }) {
       {children}
     </a>
   );
+
+  const resourcesUrl = "https://mathsthehumanstory.my.canva.site/";
+
   return (
     <header className="sticky top-0 z-40 backdrop-blur border-b border-white/10 bg-slate-900/60">
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
@@ -478,6 +482,7 @@ function SiteNav({ route }) {
           <span className="inline-block h-3 w-3 rounded bg-cyan-400" />
           MathCinema
         </a>
+
         <div className="flex gap-1">
           <Link hash="#home">Home</Link>
           <Link hash="#films">Films</Link>
@@ -485,11 +490,22 @@ function SiteNav({ route }) {
           <Link hash="#pricing">Pricing</Link>
           <Link hash="#about">About</Link>
           <Link hash="#contact">Contact</Link>
+
+          {/* External link */}
+          <a
+            href={resourcesUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="px-3 py-2 rounded-xl hover:bg-white/10 text-white/80"
+          >
+            Maths History Resources
+          </a>
         </div>
       </nav>
     </header>
   );
 }
+
 
 /* ========= Home & Hero ========= */
 function Home() {

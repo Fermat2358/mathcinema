@@ -20,3 +20,6 @@ Upload the `dist/` folder to Netlify (or connect the repo).
 - Swap `cover` image URLs and `trailerLink`
 - Add your Virtway + Frame VR links in the Museum section
 “Deployed via Netlify from GitHub”
+
+## Latest working deploy
+- https://mathshistorymovies.netlify.app/

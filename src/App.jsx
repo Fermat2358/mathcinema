@@ -87,6 +87,18 @@ function TrailerModal({ open, title, src, onClose }) {
     </div>
   );
 }
+/* ========= VR preview videos (public) ========= */
+const VR_PREVIEW_VIDEOS = {
+  museum: {
+    title: "Museum Preview",
+    // cleaned from your iframe snippet (use URL only, no <iframe>)
+    src: "https://player.vimeo.com/video/1152281241?h=806ddf4210&badge=0&autopause=0&player_id=0&app_id=58479",
+  },
+  escape: {
+    title: "Escape Room Preview",
+    src: "https://player.vimeo.com/video/1152284021?h=f71b0cb5e3&badge=0&autopause=0&player_id=0&app_id=58479",
+  },
+};
 
 /* ========= Film catalog ========= */
 const initialFilms = [
@@ -727,6 +739,8 @@ function FilmModal({ film, onClose }) {
 /* ========= Museum ========= */
 /* ========= Museum ========= */
 function Museum() {
+  const [demoOpen, setDemoOpen] = React.useState(false);
+
   return (
     <section className="py-12 space-y-8" id="museum">
       <header className="space-y-2">
@@ -737,31 +751,210 @@ function Museum() {
         </p>
       </header>
 
+      {/* Your existing preview cards (keep as-is) */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <VRCard
-          title="Frame VR Museum"
-          description="A virtual gallery of the great mathematicians in history."
-          cover="/posters/framevr.png"
-          accessLabel="Open in Frame VR"
-          accessLink="https://framevr.io/cvw-olz-xsp"
-        />
+        <RequireMembership subscribeHash="#pricing">
+          <VRCard
+            title="Frame VR Museum"
+            description="A virtual gallery of the great mathematicians in history."
+            cover="/posters/framevr.png"
+            primaryLabel="Open in Frame VR"
+            primaryLink="https://framevr.io/cvw-olz-xsp"
+          />
 
-        <VRCard
-          title="Virtway · Maths History Escape Room"
-          description="A multi-user 3D environment with guided tours and live escape-room puzzles."
-          cover="/posters/virtway.png"
-          accessLabel="Enter on Virtway"
-          accessLink="https://webgl.virtway.com/...."
+          <VRCard
+            title="Virtway · Maths History Escape Room"
+            description="A multi-user 3D environment with guided tours and live escape-room puzzles."
+            cover="/posters/virtway.png"
+            primaryLabel="Enter on Virtway"
+            primaryLink="https://webgl.virtway.com/...."
+          />
+        </RequireMembership>
+      </div>
+     {/* Public preview videos (no links, visible to everyone) */}
+     <div className="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+       <PreviewVideoCard
+         title={VR_PREVIEW_VIDEOS.museum.title}
+         src={VR_PREVIEW_VIDEOS.museum.src}
         />
+       <PreviewVideoCard
+         title={VR_PREVIEW_VIDEOS.escape.title}
+        src={VR_PREVIEW_VIDEOS.escape.src}
+       />
+    </div>
+
+      {/* New: Demo request card (visible to everyone) */}
+      <div className="rounded-3xl overflow-hidden ring-1 ring-white/10 bg-white/5 shadow-2xl">
+        <div className="p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h3 className="text-2xl font-bold">Want a free demo?</h3>
+            <p className="text-slate-300 mt-1 max-w-2xl">
+              If you’re a school (or a curious human) and want to see the Museum + Escape Room before subscribing,
+              request a quick demo.
+            </p>
+          </div>
+          <button
+            onClick={() => setDemoOpen(true)}
+            className="px-5 py-3 rounded-2xl bg-amber-500/90 hover:bg-amber-500 text-slate-900 font-semibold whitespace-nowrap"
+            type="button"
+          >
+            Request a free demo
+          </button>
+        </div>
       </div>
 
-      <p className="text-sm text-slate-400">
+      <p className="text-slate-400 text-sm">
         Preview the experiences above. Full access requires an active membership.
       </p>
+
+      <DemoRequestModal open={demoOpen} onClose={() => setDemoOpen(false)} />
     </section>
   );
 }
 
+function DemoRequestModal({ open, onClose }) {
+  const [form, setForm] = React.useState({
+    name: "",
+    email: "",
+    school: "",
+    role: "",
+    message: "",
+  });
+
+  React.useEffect(() => {
+    if (!open) return;
+    // reset each time it opens (optional)
+    setForm({ name: "", email: "", school: "", role: "", message: "" });
+  }, [open]);
+
+  if (!open) return null;
+
+  const update = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  const submit = (e) => {
+    e.preventDefault();
+
+    const subject = `MathCinema VR Demo Request — ${form.school || "School/Organisation"}`;
+    const body = [
+      `Name: ${form.name}`,
+      `Email: ${form.email}`,
+      `School/Organisation: ${form.school}`,
+      `Role: ${form.role}`,
+      ``,
+      `What they'd like to demo:`,
+      `${form.message || "(not specified)"}`,
+      ``,
+      `Page: VR Museum (MathCinema)`,
+    ].join("\n");
+
+    const mailto = `mailto:gerrydocherty@gmail.com?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailto;
+    onClose?.();
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="w-full max-w-xl rounded-3xl bg-slate-900 ring-1 ring-white/10 overflow-hidden">
+        <div className="p-6 border-b border-white/10">
+          <h3 className="text-2xl font-bold">Request a Free Demo</h3>
+          <p className="text-slate-300 mt-1">
+            Tell us a little about your context and we’ll arrange a demo of the Museum and Escape Room.
+          </p>
+        </div>
+
+        <form onSubmit={submit} className="p-6 space-y-4">
+          <div className="grid gap-3 sm:grid-cols-2">
+            <input
+              value={form.name}
+              onChange={update("name")}
+              placeholder="Your name"
+              className="w-full px-4 py-3 rounded-2xl bg-white/10 border border-white/10 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              required
+            />
+            <input
+              value={form.email}
+              onChange={update("email")}
+              placeholder="Email"
+              type="email"
+              className="w-full px-4 py-3 rounded-2xl bg-white/10 border border-white/10 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+              required
+            />
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            <input
+              value={form.school}
+              onChange={update("school")}
+              placeholder="School / Organisation"
+              className="w-full px-4 py-3 rounded-2xl bg-white/10 border border-white/10 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            />
+            <input
+              value={form.role}
+              onChange={update("role")}
+              placeholder="Role (Teacher, Head, Parent...)"
+              className="w-full px-4 py-3 rounded-2xl bg-white/10 border border-white/10 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+            />
+          </div>
+
+          <textarea
+            value={form.message}
+            onChange={update("message")}
+            placeholder="What would you like to see in the demo? (e.g., KS3 tour, escape room preview, whole-school access...)"
+            rows={4}
+            className="w-full px-4 py-3 rounded-2xl bg-white/10 border border-white/10 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400"
+          />
+
+          <div className="flex gap-2 pt-2">
+            <button
+              type="submit"
+              className="px-4 py-2 rounded-xl bg-amber-500/90 hover:bg-amber-500 text-slate-900 font-semibold"
+            >
+              Send demo request
+            </button>
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10"
+            >
+              Cancel
+            </button>
+          </div>
+
+          <p className="text-xs text-slate-400">
+            Submitting opens your email client with a pre-filled message (no data stored on the site).
+          </p>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+function PreviewVideoCard({ title, src }) {
+  return (
+    <article className="rounded-3xl overflow-hidden ring-1 ring-white/10 bg-white/5 shadow-2xl">
+      <div className="p-5">
+        <h3 className="text-xl font-bold">{title}</h3>
+        <p className="text-slate-300 text-sm mt-1">
+          Click play to preview the experience.
+        </p>
+      </div>
+
+      <div className="relative w-full overflow-hidden pt-[56.25%] bg-slate-900">
+        <iframe
+          src={buildVimeoSrc(src, { autoplay: false })}
+          className="absolute inset-0 h-full w-full"
+          frameBorder="0"
+          allow="fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          title={title}
+        />
+      </div>
+    </article>
+  );
+}
 
 function VRCard({ title, description, cover, accessLabel, accessLink }) {
   const [status, setStatus] = React.useState("loading"); // loading | active | inactive

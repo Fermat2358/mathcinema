@@ -36,11 +36,20 @@ const buildVimeoSrc = (raw, { autoplay = false, muted = true } = {}) => {
 
   return url;
 };
+/* ========= Free preview (Home featured) ========= */
+const GAUSS_PREVIEW = {
+  title: "Free Preview: Carl Friedrich Gauss",
+  tagline: "Watch the film, then try the Gauss Sum Machine to generate the formula yourself.",
+  vimeoSrc:
+    "https://player.vimeo.com/video/1152153138?badge=0&autopause=0&player_id=0&app_id=58479",
+  activityLabel: "Open Gauss Sum Machine",
+  activityUrl:
+    "https://www.canva.com/design/DAG9uC006Vg/CXU-bezTu5EMR0XORC8rGA/view?utm_content=DAG9uC006Vg&utm_campaign=designshare&utm_medium=embeds&utm_source=link",
+};
 
 /* ========= Trailer Modal ========= */
 function TrailerModal({ open, title, src, onClose }) {
   if (!open) return null;
-
   return (
     <div
       className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4"
@@ -532,31 +541,52 @@ function Home() {
           </a>
         </div>
       </div>
-      <HeroCard films={initialFilms} />
+      <FeaturedPreviewCard preview={GAUSS_PREVIEW} />
     </section>
   );
 }
 
-function HeroCard({ films }) {
-  const featured = films.find((f) => f.id === "descartes");
-  if (!featured) return null;
+function FeaturedPreviewCard({ preview }) {
+  if (!preview) return null;
+
   return (
-    <div className="relative rounded-3xl overflow-hidden ring-1 ring-white/10 shadow-2xl">
-      <div className="relative w-full overflow-hidden rounded-t-3xl pt-[56.25%]">
-        <img
-          src={featured.cover}
-          alt={featured.title}
-          className="absolute inset-0 block h-full w-full object-contain bg-slate-900"
+    <div className="relative rounded-3xl overflow-hidden ring-1 ring-white/10 shadow-2xl bg-white/5">
+      {/* Video (16:9) */}
+      <div className="relative w-full overflow-hidden rounded-t-3xl pt-[56.25%] bg-slate-900">
+        <iframe
+          src={buildVimeoSrc(preview.vimeoSrc, { autoplay: false })}
+          className="absolute inset-0 h-full w-full"
+          frameBorder="0"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          title={preview.title}
         />
+        <div className="absolute top-3 left-3 text-xs px-2 py-1 rounded-full bg-black/60 ring-1 ring-white/10">
+          Free preview
+        </div>
       </div>
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-slate-900/80 via-slate-900/10 to-transparent" />
-      <div className="absolute bottom-0 p-6 space-y-2 pointer-events-none">
-        <h3 className="text-xl font-semibold">Featured: {featured.title}</h3>
-        <p className="text-slate-300">{featured.tagline}</p>
+
+      {/* Text + button */}
+      <div className="p-6 space-y-3">
+        <h3 className="text-xl font-semibold">{preview.title}</h3>
+        <p className="text-slate-300">{preview.tagline}</p>
+
+        <div className="pt-2">
+          <a
+            href={preview.activityUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center px-4 py-2 rounded-xl bg-cyan-400/90 hover:bg-cyan-300 text-slate-900 font-semibold"
+          >
+            {preview.activityLabel}
+          </a>
+        </div>
       </div>
     </div>
   );
 }
+
+
 
 /* ========= Films ========= */
 function Films({ films = [], query, setQuery, onSelect, onOpenTrailer }) {

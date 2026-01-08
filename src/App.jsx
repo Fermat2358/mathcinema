@@ -1107,7 +1107,7 @@ function Pricing() {
             Tier 1
           </div>
           <div>
-            <h3 className="text-xl font-semibold">Family &amp; Homeschool</h3>
+            <h3 className="text-xl font-semibold">Family &amp; Home Education</h3>
             <div className="text-3xl font-bold mt-2">
               {priceText("£20", "£200")}
               <span className="text-sm text-slate-300 font-semibold">{billing === "monthly" ? " / month" : " / year"}</span>
